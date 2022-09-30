@@ -16,11 +16,14 @@ Route::prefix('/admin')->namespace('App\Http\Controllers')->group(function(){
     Route::match(['get','post'],'/','UserController@login')->name('admin.login');
     Route::get('/forgot-password','UserController@forgotPassword')->name('admin.forgot-password');
     Route::get('/reset-password','UserController@resetPassword')->name('admin.reset-password');
+   
     Route::group(['middleware' => ['auth']],function(){
         Route::get('/dashboard','UserController@dashboard')->name('admin.dashboard');
-        Route::match(['get','post'],'/profile','UserController@profile')->name('admin.profile');
+        Route::get('/profile','UserController@profile')->name('admin.profile');
+        Route::match(['get','post'],'/profile/edit','UserController@updateProfile')->name('admin.profile.update');
         Route::post('/check-pwd','UserController@chkPassword')->name('admin.check-password');
         Route::post('/update-pwd','UserController@updatePassword')->name('admin.update-password');
+        Route::get('/logout','UserController@logout')->name('admin.logout');
         //skill
         Route::get('/skills','SkillController@skills')->name('admin.skill');
         Route::match(['get','post'],'/add-edit-skill','SkillController@addEditSkill')->name('admin.addEdit.skill');
