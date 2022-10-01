@@ -50,20 +50,22 @@
                       <th class="text-muted text-small text-uppercase" width="10%">ID</th>
                       <th class="text-muted text-small text-uppercase">Name</th>
                       <th class="text-muted text-small text-uppercase">Email</th>
-                      <th class="text-muted text-small text-uppercase" width="15%">Subject</th>
-                      <th class="text-muted text-small text-uppercase" width="30%">Message</th>
+                      <th class="text-muted text-small text-uppercase">Subject</th>
                       <th class="text-muted text-small text-uppercase" width="15%">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Laravel</td>
-                        <td>demo@yopmail.com</td>
-                        <td>Projec deal</td>
-                        <td>lorem ispam</td>
-                        <td><a href=""><button class="btn btn-primary btn-sm">Edit</button></a> <a href=""><button class="btn btn-danger btn-sm">Delete</button></a></td>
-                    </tr>
+                    @if($contacts->count()>0)
+                      @foreach($contacts as $key=>$contact)
+                        <tr>
+                            <td>{{$key+1}}</td>
+                            <td>{{$contact['name']}}</td>
+                            <td>{{$contact['email']}}</td>
+                            <td>{{$contact['subject']}}</td>
+                            <td><a class="confirmDelete" record="contact" recoedid="{{$contact->id}}" href="javascript:void('0')"><button class="btn btn-danger btn-sm">Delete</button></a></td>
+                        </tr>
+                      @endforeach
+                    @endif 
                 </tbody>
                 </table>
               </div>

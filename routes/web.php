@@ -26,28 +26,31 @@ Route::prefix('/admin')->namespace('App\Http\Controllers')->group(function(){
         Route::get('/logout','UserController@logout')->name('admin.logout');
         //skill
         Route::get('/skills','SkillController@skills')->name('admin.skill');
-        Route::match(['get','post'],'/add-edit-skill','SkillController@addEditSkill')->name('admin.addEdit.skill');
+        Route::match(['get','post'],'/add-edit-skill/{id?}','SkillController@addEditSkill')->name('admin.addEdit.skill');
         Route::get('/delete-skill/{id}','SkillController@deleteSkill')->name('admin.skill.delete');
         Route::post('update-skill-status','SkillController@updateSkillStatus')->name('admin.skill.status');
         //portfolio
-        Route::get('/porfolios','PortfolioController@porfolios')->name('admin.porfolios');
-        Route::match(['get','post'],'/add-edit-porfolio','PortfolioController@addEditPorfolio')->name('admin.addEdit.porfolio');
-        Route::get('/delete-porfolio/{id}','PortfolioController@deletePortfolio')->name('admin.porfolio.delete');
-        Route::post('update-porfolio-status','PortfolioController@updatePorfolioStatus')->name('admin.porfolio.status');
+        Route::get('/portfolios','PortfolioController@portfolios')->name('admin.portfolios');
+        Route::match(['get','post'],'/add-edit-portfolio/{id?}','PortfolioController@addEditPortfolio')->name('admin.addEdit.portfolio');
+        Route::get('/delete-portfolio/{id}','PortfolioController@deletePortfolio')->name('admin.portfolio.delete');
+        Route::get('/delete-porfolioImage/{id}','PortfolioController@deletePortfolioImage')->name('admin.porfolioImage.delete');
+        Route::post('update-portfolio-status','PortfolioController@updatePorfolioStatus')->name('admin.portfolio.status');
         //service
         Route::get('/services','ServiceController@services')->name('admin.services');
-        Route::match(['get','post'],'/add-edit-service','ServiceController@addEditService')->name('admin.addEdit.service');
+        Route::match(['get','post'],'/add-edit-service/{id?}','ServiceController@addEditService')->name('admin.addEdit.service');
         Route::get('/delete-service/{id}','ServiceController@deleteService')->name('admin.service.delete');
         Route::post('update-service-status','ServiceController@updateServiceStatus')->name('admin.service.status');
         //testmonial
-        Route::get('/testmonials','TestmonialController@testmonials')->name('admin.testmonials');
-        Route::match(['get','post'],'/add-edit-testmonial','TestmonialController@addEditTestminial')->name('admin.addEdit.testmonial');
+        Route::get('testmonials','TestmonialController@testmonials')->name('admin.testmonials');
+        Route::match(['get','post'],'/add-edit-testmonial/{id?}','TestmonialController@addEditTestminial')->name('admin.addEdit.testmonial');
         Route::get('/delete-testmonial/{id}','TestmonialController@deleteTestmonial')->name('admin.testmonial.delete');
+        Route::get('/delete-testmonialImage/{id}','TestmonialController@deleteTestmonialImage')->name('admin.testmonialImage.delete');
         Route::post('update-testmonial-status','TestmonialController@updateTestmonialStatus')->name('admin.testmonial.status');
         //logo
         Route::get('/logos','LogoController@logos')->name('admin.logos');
-        Route::match(['get','post'],'/add-edit-logo','LogoController@addEditLogo')->name('admin.addEdit.logo');
+        Route::match(['get','post'],'/add-edit-logo/{id?}','LogoController@addEditLogo')->name('admin.addEdit.logo');
         Route::get('/delete-logo/{id}','LogoController@deleteLogo')->name('admin.logo.delete');
+        Route::get('/delete-logoImage/{id}','LogoController@deleteLogoImage')->name('admin.logoImage.delete');
         Route::post('update-logo-status','LogoController@updateLogoStatus')->name('admin.logo.status');
         //contact
         Route::get('contacts','ContactController@contacts')->name('admin.contacts');

@@ -19,7 +19,7 @@
             </a>
           </li>
           <li>
-            <a href="{{route('admin.porfolios')}}">
+            <a href="{{route('admin.portfolios')}}">
               <i data-acorn-icon="file-image" class="icon d-none"></i>
               <span class="label">Porfolios</span>
             </a>

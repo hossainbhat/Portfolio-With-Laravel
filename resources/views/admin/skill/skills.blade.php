@@ -32,10 +32,10 @@
                 <!-- Top Buttons Start -->
                 <div class="col-12 col-md-5 d-flex align-items-start justify-content-end">
                   <!-- Add New Button Start -->
-                  <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto add-datatable">
+                  <a href="{{route('admin.addEdit.skill')}}"><button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto add-datatable">
                     <i data-acorn-icon="plus"></i>
                     <span>Add New</span>
-                  </button>
+                  </button></a>
                   <!-- Add New Button End -->
                 </div>
                 <!-- Top Buttons End -->
@@ -62,13 +62,26 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Laravel</td>
-                        <td>90</td>
-                        <td>Active</td>
-                        <td><a href=""><button class="btn btn-primary btn-sm">Edit</button></a> <a href=""><button class="btn btn-danger btn-sm">Delete</button></a></td>
-                    </tr>
+                    @if($skills->count()>0)
+                      @foreach ($skills as $key=>$skill)
+                        <tr>
+                          <td>{{$key+1}}</td>
+                          <td>{{$skill['title']}}</td>
+                          <td>{{$skill['persent']}}</td>
+                          <td>
+                            @if($skill->status ==1)
+                              <a class="updateSkillStatus" id="skill-{{$skill->id}}" skill_id="{{$skill->id}}" href="javascript:void(0)">Active</a>  
+                            @else
+                              <a class="updateSkillStatus" id="skill-{{$skill->id}}" skill_id="{{$skill->id}}" href="javascript:void(0)">Inactive</a>  
+                            @endif
+                          </td>
+                          <td>
+                            <a href="{{url('admin/add-edit-skill/'.$skill['id'] )}}"><button class="btn btn-primary btn-sm">Edit</button></a>
+                            <a class="confirmDelete" record="skill" recoedid="{{$skill->id}}" href="javascript:void('0')"><button class="btn btn-danger btn-sm">Delete</button></a>
+                          </td>
+                        </tr>
+                      @endforeach
+                    @endif 
                 </tbody>
                 </table>
               </div>
@@ -76,68 +89,6 @@
             </div>
             <!-- Content End -->
 
-            <!-- Add Edit Modal Start -->
-            <div class="modal modal-right fade" id="addEditModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitle">Add New</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <form>
-                      <div class="mb-3">
-                        <label class="form-label">Name</label>
-                        <input name="Name" type="text" class="form-control" />
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Sales</label>
-                        <input name="Sales" type="number" class="form-control" />
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Stock</label>
-                        <input name="Stock" type="number" class="form-control" />
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Category</label>
-                        <div class="form-check">
-                          <input type="radio" id="category1" name="Category" value="Whole Wheat" class="form-check-input" />
-                          <label class="form-check-label" for="category1">Whole Wheat</label>
-                        </div>
-                        <div class="form-check">
-                          <input type="radio" id="category2" name="Category" value="Sourdough" class="form-check-input" />
-                          <label class="form-check-label" for="category2">Sourdough</label>
-                        </div>
-                        <div class="form-check">
-                          <input type="radio" id="category3" name="Category" value="Multigrain" class="form-check-input" />
-                          <label class="form-check-label" for="category3">Multigrain</label>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Tag</label>
-                        <div class="form-check">
-                          <input type="radio" id="tag1" name="Tag" value="New" class="form-check-input" />
-                          <label class="form-check-label" for="tag1">New</label>
-                        </div>
-                        <div class="form-check">
-                          <input type="radio" id="tag2" name="Tag" value="Sale" class="form-check-input" />
-                          <label class="form-check-label" for="tag2">Sale</label>
-                        </div>
-                        <div class="form-check">
-                          <input type="radio" id="tag3" name="Tag" value="Done" class="form-check-input" />
-                          <label class="form-check-label" for="tag3">Done</label>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="addEditConfirmButton">Add</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Add Edit Modal End -->
           </div>
         <!-- Page Content End -->
       </div>

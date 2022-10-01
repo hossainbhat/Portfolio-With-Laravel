@@ -1,7 +1,7 @@
 @php
     $html_tag_data = [];
-    $title = 'Testmonial List';
-    $description= 'Testmonial for Admin';
+    $title = 'Portfolio List';
+    $description= 'Portfolio for Admin';
 @endphp
 @extends('layouts.admin_layouts.master',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 @section("content")
@@ -19,7 +19,7 @@
                 <nav class="breadcrumb-container d-inline-block" aria-label="breadcrumb">
                   <ul class="breadcrumb pt-0">
                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{route('admin.testmonials')}}">Testmonial List</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('admin.portfolios')}}">Portfolio List</a></li>
                   </ul>
                 </nav>
               </div>
@@ -35,30 +35,30 @@
                 <div class="card mb-5">
                   <div class="card-body">
                     <!-- tooltip-label-end inputs should be wrapped in form-group class -->
-                    <form id="exampleForm" class="tooltip-label-end" novalidate="novalidate" @if(empty($testmonialdata['id'])) action="{{route('admin.addEdit.testmonial')}}" @else   action="{{route('admin.addEdit.testmonial',$testmonialdata['id'] )}}" @endif method="post" enctype="multipart/form-data">
+                    <form id="exampleForm" class="tooltip-label-end" novalidate="novalidate" @if(empty($portfoliodata['id'])) action="{{route('admin.addEdit.portfolio')}}" @else   action="{{route('admin.addEdit.portfolio',$portfoliodata['id'] )}}" @endif method="post" enctype="multipart/form-data">
                         @csrf 
                       <div class="mb-3 position-relative form-group">
-                        <label class="form-label">Name</label>
-                        <input type="text" class="form-control" name="name" placeholder="Enter Name" @if(!empty($testmonialdata['name'])) value="{{$testmonialdata['name']}}" @else value="{{ old('name')}}" @endif>
+                        <label class="form-label">Title</label>
+                        <input type="text" class="form-control" name="title" placeholder="Enter Title" @if(!empty($portfoliodata['title'])) value="{{$portfoliodata['title']}}" @else value="{{ old('title')}}" @endif>
                       </div>
                       <div class="mb-3 position-relative form-group">
-                        <label class="form-label">Company</label>
-                        <input type="text" class="form-control" name="company" placeholder="Enter Title" @if(!empty($testmonialdata['company'])) value="{{$testmonialdata['company']}}" @else value="{{ old('company')}}" @endif>
+                        <label class="form-label">Link</label>
+                        <input type="text" class="form-control" name="link" placeholder="Enter Title" @if(!empty($portfoliodata['link'])) value="{{$portfoliodata['link']}}" @else value="{{ old('link')}}" @endif>
                       </div>
                       <div class="mb-3 position-relative form-group">
                         <label class="form-label">Description</label>
-                        <textarea name="description" class="form-control" cols="30" rows="5" placeholder="Enter Description">@if(!empty($testmonialdata['description'])) {{$testmonialdata['description']}} @else {{ old('description')}} @endif</textarea>
+                        <textarea name="description" class="form-control" cols="30" rows="5" placeholder="Enter Description">@if(!empty($portfoliodata['description'])) {{$portfoliodata['description']}} @else {{ old('description')}} @endif</textarea>
                       </div>
                       <div class="mb-3 position-relative form-group">
                         <label class="form-label">Image</label>
                         <input type="file" class="form-control" name="image">
                       </div>
-                      @if(!empty($testmonialdata['image']))
-                          <div style="height: 90px;">
-                              <img style="width: 80px; margin-top: 5px;" src="{{asset($testmonialdata['image'])}}" >
-                              &nbsp;
-                              <a class="confirmDelete" record="testmonialImage" recoedid="{{$testmonialdata->id}}" href="javascript:void('0')">Delete</a>
-                          </div>
+                        @if(!empty($portfoliodata['image']))
+                            <div style="height: 90px;">
+                                <img style="width: 80px; margin-top: 5px;" src="{{asset($portfoliodata['image'])}}" >
+                                &nbsp;
+                                <a class="confirmDelete" record="porfolioImage" recoedid="{{$portfoliodata->id}}" href="javascript:void('0')">Delete</a>
+                            </div>
                         @endif
                       <button type="submit" class="btn btn-primary mb-0">{{$name}}</button>
                     </form>

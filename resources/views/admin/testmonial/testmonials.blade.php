@@ -1,7 +1,7 @@
 @php
     $html_tag_data = [];
-    $title = 'Dashboard';
-    $description= 'Dashboard for Admin';
+    $title = 'Tesitmonial';
+    $description= 'Tesitmonial for Admin';
 @endphp
 @extends('layouts.admin_layouts.master',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 @section("content")
@@ -32,10 +32,10 @@
                 <!-- Top Buttons Start -->
                 <div class="col-12 col-md-5 d-flex align-items-start justify-content-end">
                   <!-- Add New Button Start -->
-                  <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto add-datatable">
+                  <a href="{{route('admin.addEdit.testmonial')}}"><button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto add-datatable">
                     <i data-acorn-icon="plus"></i>
                     <span>Add New</span>
-                  </button>
+                  </button></a>
                   <!-- Add New Button End -->
                 </div>
                 <!-- Top Buttons End -->
@@ -64,83 +64,35 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>kamal</td>
-                        <td>Bikash</td>
-                        <td><img src="" alt="" width="50" height="50"></td>
-                        <td>Laravel</td>
-                        <td>Active</td>
-                        <td><a href=""><button class="btn btn-primary btn-sm">Edit</button></a> <a href=""><button class="btn btn-danger btn-sm">Delete</button></a></td>
-                    </tr>
+                    @if($testmonials->count()>0)
+                      @foreach($testmonials as $key=>$testmonial)
+                      <tr>
+                          <td>{{$key+1}}</td>
+                          <td>{{$testmonial['name']}}</td>
+                          <td>{{$testmonial['company']}}</td>
+                          <td><img src="{{asset($testmonial['image'])}}" alt="" width="50" height="50"></td>
+                          <td>{{$testmonial['description']}}</td>
+                          <td>
+                            @if($testmonial->status ==1)
+                              <a class="updateTestmonialStatus" id="testmonial-{{$testmonial->id}}" testmonial_id="{{$testmonial->id}}" href="javascript:void(0)">Active</a>  
+                            @else
+                              <a class="updateTestmonialStatus" id="testmonial-{{$testmonial->id}}" testmonial_id="{{$testmonial->id}}" href="javascript:void(0)">Inactive</a>  
+                            @endif
+                          </td>
+                          <td>
+                            <a href="{{url('admin/add-edit-testmonial/'.$testmonial['id'] )}}"><button class="btn btn-primary btn-sm">Edit</button></a> 
+                            <a class="confirmDelete" record="testmonial" recoedid="{{$testmonial->id}}" href="javascript:void('0')"><button class="btn btn-danger btn-sm">Delete</button></a>
+                          </td>
+                      </tr>
+                    @endforeach
+                  @endif 
                 </tbody>
                 </table>
               </div>
               <!-- Table End -->
             </div>
             <!-- Content End -->
-            <!-- Add Edit Modal Start -->
-            <div class="modal modal-right fade" id="addTestmonialModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitle">Add New</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <form>
-                      <div class="mb-3">
-                        <label class="form-label">Name</label>
-                        <input name="Name" type="text" class="form-control" />
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Sales</label>
-                        <input name="Sales" type="number" class="form-control" />
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Stock</label>
-                        <input name="Stock" type="number" class="form-control" />
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Category</label>
-                        <div class="form-check">
-                          <input type="radio" id="category1" name="Category" value="Whole Wheat" class="form-check-input" />
-                          <label class="form-check-label" for="category1">Whole Wheat</label>
-                        </div>
-                        <div class="form-check">
-                          <input type="radio" id="category2" name="Category" value="Sourdough" class="form-check-input" />
-                          <label class="form-check-label" for="category2">Sourdough</label>
-                        </div>
-                        <div class="form-check">
-                          <input type="radio" id="category3" name="Category" value="Multigrain" class="form-check-input" />
-                          <label class="form-check-label" for="category3">Multigrain</label>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Tag</label>
-                        <div class="form-check">
-                          <input type="radio" id="tag1" name="Tag" value="New" class="form-check-input" />
-                          <label class="form-check-label" for="tag1">New</label>
-                        </div>
-                        <div class="form-check">
-                          <input type="radio" id="tag2" name="Tag" value="Sale" class="form-check-input" />
-                          <label class="form-check-label" for="tag2">Sale</label>
-                        </div>
-                        <div class="form-check">
-                          <input type="radio" id="tag3" name="Tag" value="Done" class="form-check-input" />
-                          <label class="form-check-label" for="tag3">Done</label>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="addEditConfirmButton">Add</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Add Edit Modal End -->
+          
           </div>
         <!-- Page Content End -->
       </div>
