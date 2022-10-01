@@ -197,12 +197,14 @@
                     <div class="col-sm-8 col-md-9 col-lg-10">
                       <input type="file" name="image" class="form-control" >
                     </div>
+                   
                   </div>
                   <div class="mb-3 row">
                     <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Upload CV</label>
                     <div class="col-sm-8 col-md-9 col-lg-10">
                       <input type="file" name="cv" class="form-control" >
                     </div>
+                   
                   </div>
 
                 <div class="mb-3 row mt-5">
@@ -211,6 +213,20 @@
                   </div>
                 </div>
               </form>
+              @if(!empty(Auth::user()->image))
+              <div style="height: 90px;float:left;">
+                  <img style="width: 60px; margin-top: 5px;" src="{{asset(Auth::user()->image)}}" >
+                  &nbsp;
+                  <a class="confirmDelete btn btn-danger btn-sm" record="profileImage" recoedid="{{Auth::user()->id}}" href="javascript:void('0')">Delete</a>
+              </div>
+            @endif
+            @if(!empty(Auth::user()->cv))
+            <div style="height: 90px;float:right;">
+                <a href="{{asset(Auth::user()->cv)}}" target="_blanck">View Your CV</a>
+                &nbsp;
+                <a class="confirmDelete btn btn-danger btn-sm" record="profileCV" recoedid="{{Auth::user()->id}}" href="javascript:void('0')">Delete</a>
+            </div>
+          @endif
             </div>
           </div>
           <!-- Public Info End -->

@@ -14,13 +14,14 @@ Route::namespace('App\Http\Controllers')->group(function(){
 
 Route::prefix('/admin')->namespace('App\Http\Controllers')->group(function(){
     Route::match(['get','post'],'/','UserController@login')->name('admin.login');
-    Route::get('/forgot-password','UserController@forgotPassword')->name('admin.forgot-password');
-    Route::get('/reset-password','UserController@resetPassword')->name('admin.reset-password');
+    Route::match(['get','post'],'/forgot-password','UserController@forgotPassword')->name('admin.forgot-password');
    
     Route::group(['middleware' => ['auth']],function(){
         Route::get('/dashboard','UserController@dashboard')->name('admin.dashboard');
         Route::get('/profile','UserController@profile')->name('admin.profile');
         Route::match(['get','post'],'/profile/edit','UserController@updateProfile')->name('admin.profile.update');
+        Route::get('/delete-profileImage/{id}','UserController@deleteProfileImage')->name('admin.profileImage.delete');
+        Route::get('/delete-profileCV/{id}','UserController@deleteProfileCV')->name('admin.profileCV.delete');
         Route::post('/check-pwd','UserController@chkPassword')->name('admin.check-password');
         Route::post('/update-pwd','UserController@updatePassword')->name('admin.update-password');
         Route::get('/logout','UserController@logout')->name('admin.logout');
@@ -56,7 +57,6 @@ Route::prefix('/admin')->namespace('App\Http\Controllers')->group(function(){
         Route::get('contacts','ContactController@contacts')->name('admin.contacts');
         Route::get('contact/view/{id}','ContactController@viewContact')->name('admin.contact.view');
         Route::get('delete-contact/{id}','ContactController@deleteContact')->name('admin.contact.delete');
-        Route::post('update-contact-status','ContactController@updateContactStatus')->name('admin.contact.status');
     });
 });
 

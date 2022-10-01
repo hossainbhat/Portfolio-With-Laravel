@@ -19,8 +19,7 @@
             <div class="row">
               <!-- Title Start -->
               <div class="col mb-2">
-                <h1 class="mb-2 pb-0 display-4" id="title">Getting Started</h1>
-                <div class="text-muted font-heading text-small">Let us manage the database engines for your applications so you can focus on building.</div>
+                <h1 class="mb-2 pb-0 display-4" id="title">Welcome, {{Auth::user()->name}}</h1>
               </div>
               <!-- Title End -->
             </div>
@@ -53,7 +52,7 @@
               <div class="scroll-out">
                 <div class="scroll-by-count" data-count="4">
                   <div class="card mb-2 hover-border-primary">
-                    <a href="Services.DatabaseAdd.html" class="row g-0 sh-9">
+                    <a href="{{route('admin.contacts')}}" class="row g-0 sh-9">
                       <div class="col-auto">
                         <div class="sw-9 sh-9 d-inline-block d-flex justify-content-center align-items-center">
                           <div class="fw-bold text-primary">
@@ -64,15 +63,15 @@
                       <div class="col">
                         <div class="card-body d-flex flex-column ps-0 pt-0 pb-0 h-100 justify-content-center">
                           <div class="d-flex flex-column">
-                            <div class="text-alternate">Add New Volume</div>
-                            <div class="text-small text-muted">Snaps muffin macaroon.</div>
+                            <div class="text-alternate">Total Email (20)</div>
+                            <div class="text-small text-muted">Clint Mail your.</div>
                           </div>
                         </div>
                       </div>
                     </a>
                   </div>
                   <div class="card mb-2 hover-border-primary">
-                    <a href="Services.Storage.html" class="row g-0 sh-9">
+                    <a href="{{route('admin.skill')}}" class="row g-0 sh-9">
                       <div class="col-auto">
                         <div class="sw-9 sh-9 d-inline-block d-flex justify-content-center align-items-center">
                           <div class="fw-bold text-primary">
@@ -83,15 +82,15 @@
                       <div class="col">
                         <div class="card-body d-flex flex-column ps-0 pt-0 pb-0 h-100 justify-content-center">
                           <div class="d-flex flex-column">
-                            <div class="text-alternate">Cloud Storage</div>
-                            <div class="text-small text-muted">Brownie ice cream marshmallow topping.</div>
+                            <div class="text-alternate">Total Skill (20)</div>
+                            <div class="text-small text-muted">Your Skill Samary</div>
                           </div>
                         </div>
                       </div>
                     </a>
                   </div>
                   <div class="card mb-2 hover-border-primary">
-                    <a href="Account.Security.html" class="row g-0 sh-9">
+                    <a href="{{route('admin.portfolios')}}" class="row g-0 sh-9">
                       <div class="col-auto">
                         <div class="sw-9 sh-9 d-inline-block d-flex justify-content-center align-items-center">
                           <div class="fw-bold text-primary">
@@ -102,15 +101,15 @@
                       <div class="col">
                         <div class="card-body d-flex flex-column ps-0 pt-0 pb-0 h-100 justify-content-center">
                           <div class="d-flex flex-column">
-                            <div class="text-alternate">Server Security</div>
-                            <div class="text-small text-muted">Sugar plum gummi bears jujubes.</div>
+                            <div class="text-alternate">Total Portfolio (10)</div>
+                            <div class="text-small text-muted">Your Portfolio Samary.</div>
                           </div>
                         </div>
                       </div>
                     </a>
                   </div>
                   <div class="card mb-2 hover-border-primary">
-                    <a href="Services.DatabaseDetail.html" class="row g-0 sh-9">
+                    <a href="{{route('admin.services')}}" class="row g-0 sh-9">
                       <div class="col-auto">
                         <div class="sw-9 sh-9 d-inline-block d-flex justify-content-center align-items-center">
                           <div class="fw-bold text-primary">
@@ -121,15 +120,15 @@
                       <div class="col">
                         <div class="card-body d-flex flex-column ps-0 pt-0 pb-0 h-100 justify-content-center">
                           <div class="d-flex flex-column">
-                            <div class="text-alternate">Track Metrics</div>
-                            <div class="text-small text-muted">Jujubes candy jelly-o topping.</div>
+                            <div class="text-alternate">Total Service (5)</div>
+                            <div class="text-small text-muted">Your Service Samary.</div>
                           </div>
                         </div>
                       </div>
                     </a>
                   </div>
                   <div class="card mb-2 hover-border-primary">
-                    <a href="Support.Docs.html" class="row g-0 sh-9">
+                    <a href="{{route('admin.logos')}}" class="row g-0 sh-9">
                       <div class="col-auto">
                         <div class="sw-9 sh-9 d-inline-block d-flex justify-content-center align-items-center">
                           <div class="fw-bold text-primary">
@@ -140,8 +139,27 @@
                       <div class="col">
                         <div class="card-body d-flex flex-column ps-0 pt-0 pb-0 h-100 justify-content-center">
                           <div class="d-flex flex-column">
-                            <div class="text-alternate">Integration Guides</div>
-                            <div class="text-small text-muted">Jujubes candy jelly-o topping.</div>
+                            <div class="text-alternate">Total Logo (5)</div>
+                            <div class="text-small text-muted">You Number of Company work .</div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="card mb-2 hover-border-primary">
+                    <a href="{{route('admin.testmonials')}}" class="row g-0 sh-9">
+                      <div class="col-auto">
+                        <div class="sw-9 sh-9 d-inline-block d-flex justify-content-center align-items-center">
+                          <div class="fw-bold text-primary">
+                            <i data-acorn-icon="category"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="card-body d-flex flex-column ps-0 pt-0 pb-0 h-100 justify-content-center">
+                          <div class="d-flex flex-column">
+                            <div class="text-alternate">Total Tesmonial (5)</div>
+                            <div class="text-small text-muted">Clint Feedback .</div>
                           </div>
                         </div>
                       </div>

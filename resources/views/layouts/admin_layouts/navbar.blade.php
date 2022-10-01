@@ -107,21 +107,9 @@
       <div class="menu-container flex-grow-1">
         <ul id="menu" class="menu">
           <li>
-            <a href="Blog.html">
-              <i data-acorn-icon="file-text" class="icon" data-acorn-size="18"></i>
-              <span class="label">Blog</span>
-            </a>
-          </li>
-          <li>
-            <a href="Upgrade.html">
+            <a href="{{route('index')}}" target="_blanck">
               <i data-acorn-icon="trend-up" class="icon" data-acorn-size="18"></i>
-              <span class="label">Upgrade</span>
-            </a>
-          </li>
-          <li>
-            <a href="Community.html">
-              <i data-acorn-icon="messages" class="icon" data-acorn-size="18"></i>
-              <span class="label">Community</span>
+              <span class="label">Website</span>
             </a>
           </li>
         </ul>

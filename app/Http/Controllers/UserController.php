@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\User;
 use Session;
 use Image;
@@ -38,12 +40,33 @@ class UserController extends Controller
     	}
         return view('admin.login');
     }
-    public function forgotPassword(){
-        
+    public function forgotPassword(Request $request){
+        if($request->isMethod('post')){
+            $data = $request->input();
+            $emailCount = User::where('email',$data['email'])->count();
+            if($emailCount ==0){
+                toastr()->error('Email does not exist');
+            }
+            $random_password = Str::random(8);
+            $new_password = bcrypt($random_password);
+            User::where('email',$data['email'])->update(['password'=>$new_password]);
+            $userName= User ::select('name')->where('email',$data['email'])->first();
+            $email  = $data['email'];
+            $name   = $userName->name;
+            $messageData =[
+                'email'     =>$email,
+                'name'      =>$name,
+                'password'  => $random_password
+            ];
+            Mail::send('email.forgot_password',$messageData,function($message) use ($email){
+                $message ->to($email)->subject('Your Recovery Password');
+            });
+
+            toastr()->success('please check your email for new password');
+        }
+        return view('admin.forgot_password');
     }
-    public function resetPassword(){
-        
-    }
+ 
     public function dashboard(){
        
         return view('admin.dashboard');
@@ -67,9 +90,13 @@ class UserController extends Controller
                 'linkdin' => 'required',
                 'twitter' => 'required',
                 'github' => 'required',
+                'image' => 'required',
+                'cv' => 'required',
             ];
 
             $customMessage = [
+                'image.required' =>'Profile Image is required',
+                'cv.required' =>'Your CV is required',
                 'name.required' =>'Name is required',
                 'title.required' =>'Title is required',
                 'designation.required' =>'Designation is required',
@@ -96,9 +123,9 @@ class UserController extends Controller
                     Image::make($image_temp)->resize(150,150)->save($imagePath);
                 }
             }else if (!empty($data['image'])){
-                $imageName = $data['image'];
+                $imagePath = $data['image'];
             }else{
-                $imageName = "";
+                $imagePath = "";
             }
 
             if($request->file('cv')) {
@@ -108,13 +135,41 @@ class UserController extends Controller
                 $location = 'uploads/cv/';
                 // Upload file
                 $file = $file->move($location,$filename);
-             }
+             }else if (!empty($data['cv'])){
+                $file = $data['cv'];
+            }else{
+                $file = "";
+            }
 
             User::where('email',Auth::user()->email)->update(['name'=>$data['name'],'phone'=>$data['phone'],'title'=>$data['title'],'designation'=>$data['designation'],'bio'=>$data['bio'],'location'=>$data['location'],'facebook'=>$data['facebook'],'linkdin'=>$data['linkdin'],'twitter'=>$data['twitter'],'github'=>$data['github'],'image'=>$imagePath,'cv'=>$file]);
             toastr()->success('Your profile has been updated Successfull');
             return redirect()->back();
         }
         return view("admin.edit-profile");
+    }
+
+    public function deleteProfileImage($id){
+        $profileImage = User::select('image')->where('id',$id)->first();
+
+        if (file_exists($profileImage->image)) {
+            unlink($profileImage->image);
+        }
+        User::where('id',$id)->update(['image'=>'']);
+
+        toastr()->success("Profile Image has been deleted Successfully!");
+        return redirect()->back();
+    }
+
+    public function deleteProfileCV($id){
+        $profileImage = User::select('cv')->where('id',$id)->first();
+
+        if (file_exists($profileImage->image)) {
+            unlink($profileImage->image);
+        }
+        User::where('id',$id)->update(['cv'=>'']);
+
+        toastr()->success("Your CV has been deleted Successfully!");
+        return redirect()->back();
     }
 
     public function chkPassword(Request $request){

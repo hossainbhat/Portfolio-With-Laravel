@@ -19,7 +19,5 @@ class ContactController extends Controller
         toastr()->success('contacts has been deleted Successfully');
         return redirect("admin/contacts");
     }
-    public function updateContactStatus(){
-        
-    }
+ 
 }
