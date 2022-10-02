@@ -71,7 +71,7 @@
                           <td>{{$testmonial['name']}}</td>
                           <td>{{$testmonial['company']}}</td>
                           <td><img src="{{asset($testmonial['image'])}}" alt="" width="50" height="50"></td>
-                          <td>{{$testmonial['description']}}</td>
+                          <td>{{ \Illuminate\Support\Str::limit($testmonial['description'], 10, $end='...') }}</td>
                           <td>
                             @if($testmonial->status ==1)
                               <a class="updateTestmonialStatus" id="testmonial-{{$testmonial->id}}" testmonial_id="{{$testmonial->id}}" href="javascript:void(0)">Active</a>  

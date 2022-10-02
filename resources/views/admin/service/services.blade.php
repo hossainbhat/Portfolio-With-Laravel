@@ -67,7 +67,7 @@
                       <tr>
                         <td>{{$key+1}}</td>
                         <td>{{$service['title']}}</td>
-                        <td>{{$service['description']}}</td>
+                        <td>{{ \Illuminate\Support\Str::limit($service['description'], 20, $end='...') }}</td>
                         <td>
                           @if($service->status ==1)
                             <a class="updateServiceStatus" id="service-{{$service->id}}" service_id="{{$service->id}}" href="javascript:void(0)">Active</a>  

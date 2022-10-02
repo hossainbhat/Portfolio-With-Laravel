@@ -138,12 +138,6 @@
                       <input type="text" name="email" class="form-control" value="{{Auth::user()->email}}" disabled>
                     </div>
                   </div>
-                <div class="mb-3 row">
-                    <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Title</label>
-                    <div class="col-sm-8 col-md-9 col-lg-10">
-                      <input type="text" name="title" class="form-control" value="{{Auth::user()->title}}" placeholder="Enter website Yor Title">
-                    </div>
-                  </div>
                   <div class="mb-3 row">
                     <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Designation</label>
                     <div class="col-sm-8 col-md-9 col-lg-10">

@@ -81,7 +81,6 @@ class UserController extends Controller
             $rulse = [
                 'name' => 'required|string',
                 'phone' => 'required|numeric',
-                'title' => 'required',
                 'designation' => 'required',
                 'bio' => 'required',
                 'location' => 'required',
@@ -98,7 +97,6 @@ class UserController extends Controller
                 'image.required' =>'Profile Image is required',
                 'cv.required' =>'Your CV is required',
                 'name.required' =>'Name is required',
-                'title.required' =>'Title is required',
                 'designation.required' =>'Designation is required',
                 'bio.required' =>'Bio is required',
                 'location.required' =>'Location is required',
@@ -141,7 +139,7 @@ class UserController extends Controller
                 $file = "";
             }
 
-            User::where('email',Auth::user()->email)->update(['name'=>$data['name'],'phone'=>$data['phone'],'title'=>$data['title'],'designation'=>$data['designation'],'bio'=>$data['bio'],'location'=>$data['location'],'facebook'=>$data['facebook'],'linkdin'=>$data['linkdin'],'twitter'=>$data['twitter'],'github'=>$data['github'],'image'=>$imagePath,'cv'=>$file]);
+            User::where('email',Auth::user()->email)->update(['name'=>$data['name'],'phone'=>$data['phone'],'designation'=>$data['designation'],'bio'=>$data['bio'],'location'=>$data['location'],'facebook'=>$data['facebook'],'linkdin'=>$data['linkdin'],'twitter'=>$data['twitter'],'github'=>$data['github'],'image'=>$imagePath,'cv'=>$file]);
             toastr()->success('Your profile has been updated Successfull');
             return redirect()->back();
         }

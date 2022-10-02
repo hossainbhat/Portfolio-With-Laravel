@@ -69,9 +69,9 @@
                       <tr>
                           <td>{{$key+1}}</td>
                           <td>{{$portfolio['title']}}</td>
-                          <td>{{$portfolio['description']}}</td>
+                          <td>{{ \Illuminate\Support\Str::limit($portfolio['description'], 10, $end='...') }}</td>
                           <td><img src="{{asset($portfolio['image'])}}" alt="" width="50" height="50"></td>
-                          <td>{{$portfolio['link']}}</td>
+                          <td>{{ \Illuminate\Support\Str::limit($portfolio['link'], 10, $end='...') }}</td>
                           <td>
                             @if($portfolio->status ==1)
                               <a class="updatePorfolioStatus" id="portfolio-{{$portfolio->id}}" portfolio_id="{{$portfolio->id}}" href="javascript:void(0)">Active</a>  

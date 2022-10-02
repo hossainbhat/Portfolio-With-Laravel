@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="portfolio">
-    <meta name="keywords" content="developer, resume, cv, personal, portfolio, personal resume, hossain, bhat">
-    <meta name="hossain" content="Md_Hossain_Bhat">
+    <meta name="keywords" content="developer, resume, cv, personal, portfolio, personal resume, hossain, bhat,Md Hossain Bhat">
+    <meta name="hossain" content="Md Hossain Bhat">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My Profile</title>
+    <title>Md Hossain Bhat | Profile</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!--==========Favicon==========-->
 	<link rel="icon" href="{{asset('Front/images/favicon-16x16.png')}}" type="image/gif" sizes="16x16">
@@ -110,7 +110,7 @@
                             <div class="col-md-12">
                                 <section class="intro animate-scale">
 
-                                    <h3>I am</h3>
+                                    <h3>I am a</h3>
 
                                     <h1 class="ah-headline">
 
@@ -153,16 +153,16 @@
                 <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
                     
                     <div class="about-text-left">
-                        <h2>{{Auth::user()->name}}</h2> <!--edit name-->
-                        <h3>title</h3> <!--edit designation-->
-                        <p style="word-break: break-all;">description</p>
-                        <a href="#" download>Download CV &nbsp; &nbsp;<i class="fa fa-download"></i></a>
+                        <h2>{{$user['name']}}</h2> <!--edit name-->
+                        <h3>{{$user['designation']}}</h3> <!--edit designation-->
+                        <p style="word-break: break-all;">{{$user['bio']}}</p>
+                        <a href="{{asset($user['cv'])}}" target="_blanck">Download CV &nbsp; &nbsp;<i class="fa fa-download"></i></a>
                     </div>
                    
                 </div>
 
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                    <img src="https://cdn.dribbble.com/userupload/3158902/file/original-7c71bfa677e61dea61bc2acd59158d32.jpg?resize=400x0"  class="img-responsive" alt="about image"> <!--add your image here-->
+                    <img src="{{asset('Front/images/about/Md Hossain Bhat.jpg')}}" class="img-responsive" alt="about image"> <!--add your image here-->
                 </div>
 
                 <div class="col-md-4 col-xs-12 col-sm-12 col-lg-4">
@@ -175,20 +175,22 @@
                             <div class="row">
 
                                 <div class="col-md-12">
-                                   
-                                    <!-- skillbar -->
-                                    <div class="skillbar" data-percent="90%"> <!--edit percentage-->
+                                   @if($skills->count()>0)
+                                        @foreach ($skills as $skill)
+                                            <!-- skillbar -->
+                                            <div class="skillbar" data-percent="{{$skill['persent']}}%"> <!--edit percentage-->
 
-                                        <h6 class="skillbar-title">html</h6> <!--edit skills-->
-                                        <h6 class="skillbar-percent">90%</h6> <!--edit percentage-->
+                                                <h6 class="skillbar-title">{{$skill['title']}}</h6> <!--edit skills-->
+                                                <h6 class="skillbar-percent">{{$skill['persent']}}%</h6> <!--edit percentage-->
 
-                                        <div class="skillbar-bar">
-                                            <div class="skillbar-child"></div>
-                                        </div>
+                                                <div class="skillbar-bar">
+                                                    <div class="skillbar-child"></div>
+                                                </div>
 
-                                    </div>
-                                    <!-- end skillbar -->
-                                    
+                                            </div>
+                                            <!-- end skillbar -->
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
 
@@ -220,16 +222,17 @@
             </div>
             <div class="row">
                 <div id="services-carousel" class="owl-carousel owl-theme">
-                   
-                    <div class="single-services text-center item">
-                        <div class="services-content">
-                            <h3>title</h3> <!--edit the service you give-->
-                            <p style="word-break: break-all;">description</p>
-                        </div>
+                   @if($services->count()>0)
+                        @foreach($services as $service)
+                            <div class="single-services text-center item">
+                                <div class="services-content">
+                                    <h3>{{$service['title']}}</h3> <!--edit the service you give-->
+                                    <p style="word-break: break-all;">{{$service['description']}}</p>
+                                </div>
 
-                    </div>
-                   
-
+                            </div>
+                        @endforeach
+                    @endif 
                 </div>
 
             </div>
@@ -256,50 +259,51 @@
             <div class="row">
 
                 <div class="portfolio-items">
+                    @if($portfolios->count()>0)
+                        @foreach($portfolios as $portfolio)
+                            <div class="col-md-4 col-sm-6 col-xs-12 no-pad">
+                                <div id="inline-popups" class="port-box">
+                                    <a href="#{{$portfolio['id']}}" data-effect="mfp-zoom-out">
+                                        <div class="hovereffect">
 
-               
-                    <div class="col-md-4 col-sm-6 col-xs-12 no-pad">
-                        <div id="inline-popups" class="port-box">
-                            <a href="#porfolio_id" data-effect="mfp-zoom-out">
-                                <div class="hovereffect">
+                                            <img src="{{asset($portfolio['image'])}}" alt="portfolio image" class="img-responsive"> <!--edit image-->
+                                            <div class="overlay">
+                                                <h2>{{$portfolio['title']}}</h2> <!--your project name-->
+                                                <p>{{$portfolio['description']}}</p>
+                                            </div>
 
-                                    <img src="https://cdn.dribbble.com/userupload/3158902/file/original-7c71bfa677e61dea61bc2acd59158d32.jpg?resize=400x0" alt="portfolio image" class="img-responsive"> <!--edit image-->
-                                    <div class="overlay">
-                                        <h2>title</h2> <!--your project name-->
-                                        <p>description</p>
-                                    </div>
-
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                        </div>
-                        <div id="porfolio_id" class="white-popup mfp-with-anim mfp-hide">
-                            <div class="row">
-                                <div class="col-md-7 col-xs-12">
-                                    <div class="por-img">
-                                        <img src="https://cdn.dribbble.com/userupload/3158902/file/original-7c71bfa677e61dea61bc2acd59158d32.jpg?resize=400x0" alt="portfolio image" class="img-responsive"> <!--edit image-->
-                                    </div>
-                                </div>
-                                <div class="col-md-5 col-xs-12">
-                                    <div class="por-text">
-                                        <h2>title</h2> <!--your project name-->
-                                        <p>description</p>
-                                        <div class="por-text-details">
-                                            <div class="row">
-                                                <div class="col-xs-4">
-                                                    <p>link:</p>
-                                                </div>
-                                                <div class="col-xs-offset-1 col-xs-7">
-                                                    <p><a target="_blank" href="#">View</a></p> <!--edit here-->
+                                <div id="{{$portfolio['id']}}" class="white-popup mfp-with-anim mfp-hide">
+                                    <div class="row">
+                                        <div class="col-md-7 col-xs-12">
+                                            <div class="por-img">
+                                                <img src="{{asset($portfolio['image'])}}" alt="portfolio image" class="img-responsive"> <!--edit image-->
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-xs-12">
+                                            <div class="por-text">
+                                                <h2>{{$portfolio['title']}}</h2> <!--your project name-->
+                                                <p>{{$portfolio['description']}}</p>
+                                                <div class="por-text-details">
+                                                    <div class="row">
+                                                        <div class="col-xs-4">
+                                                            <p>link:</p>
+                                                        </div>
+                                                        <div class="col-xs-offset-1 col-xs-7">
+                                                            <p><a target="_blank" href="{{$portfolio['link']}}">View</a></p> <!--edit here-->
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
 
-                    </div>
-                
+                            </div>
+                        @endforeach
+                    @endif 
 
                 </div> <!--end portfolio grid -->
 
@@ -328,18 +332,20 @@
                 <div class="col-md-10 col-md-offset-1">
                     <div class="review-area">
                         <div id="testimonial-carousel" class="owl-carousel owl-theme">
-                        
-                            <div class="single-testi text-center item">
-                                <div class="testi-img">
-                                    <img src="https://cdn.dribbble.com/userupload/3158902/file/original-7c71bfa677e61dea61bc2acd59158d32.jpg?resize=400x0" alt="testimonial image"> <!--edit image-->
-                                </div>
-                                <div class="block-quote">
-                                <p>description</p> <!--edit here-->
-                                    <h2>name</h2> <!--edit here-->
-                                    <h3>title, company</h3> <!--edit here-->
-                                </div>
-                            </div>
-                        
+                            @if($testmonials->count()>0)
+                                @foreach($testmonials as $testmonial)
+                                    <div class="single-testi text-center item">
+                                        <div class="testi-img">
+                                            <img src="{{asset($testmonial['image'])}}" alt="testimonial image"> <!--edit image-->
+                                        </div>
+                                        <div class="block-quote">
+                                        <p>{{$testmonial['description']}}</p> <!--edit here-->
+                                            <h2>{{$testmonial['name']}}</h2> <!--edit here-->
+                                            <h3>{{$testmonial['company']}}</h3> <!--edit here-->
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -369,21 +375,21 @@
                     <div class="single-contact text-center wow fadeInDown" data-wow-delay="0.2s">
                         <i class="fa fa-home"></i>
                         <h2>Location</h2>
-                        <p>dhaka</p> <!--edit here-->
+                        <p>{{$user['location']}}</p> <!--edit here-->
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
                     <div class="single-contact text-center wow fadeInDown" data-wow-delay="0.4s">
                         <i class="fa fa-phone"></i>
                         <h2>Phone: </h2>
-                        <p>+88015783</p> <!--edit here-->
+                        <p>+88{{$user['phone']}}</p> <!--edit here-->
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
                     <div class="single-contact text-center wow fadeInDown" data-wow-delay="0.6s">
                         <i class="fa fa-envelope-o"></i>
                         <h2>Email</h2>
-                        <p>demo@yopmail.com</p> <!--edit here-->
+                        <p>{{$user['email']}}</p> <!--edit here-->
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
@@ -391,10 +397,10 @@
                         <i class="fa fa-gg"></i>
                         <h2>Social Media: </h2>
                         <div class="socials">
-                            <a href="#" target="_blank"><i class="fa fa-facebook"></i></a> <!--your facebook profile link here-->
-                            <a href="#" target="_blank"><i class="fa fa-linkedin"></i></a> <!--your linkedin profile link here-->
-                            <a href="#" target="_blank"><i class="fa fa-twitter"></i></a> <!--your twitter profile link here-->
-                            <a href="#" target="_blank"><i class="fa fa-gitlab"></i></a> <!--your pinterest profile link here-->
+                            <a href="{{$user['facebook']}}" target="_blank"><i class="fa fa-facebook"></i></a> <!--your facebook profile link here-->
+                            <a href="{{$user['linkdin']}}" target="_blank"><i class="fa fa-linkedin"></i></a> <!--your linkedin profile link here-->
+                            <a href="{{$user['twitter']}}" target="_blank"><i class="fa fa-twitter"></i></a> <!--your twitter profile link here-->
+                            <a href="{{$user['github']}}" target="_blank"><i class="fa fa-gitlab"></i></a> <!--your pinterest profile link here-->
                         </div>
                     </div>
                 </div>
@@ -404,7 +410,7 @@
 
                 <div class="col-md-10 col-md-offset-1">
                  
-                    <form method="post" action="#" class="wow fadeInDown" data-wow-delay="1s">
+                    <form method="post" action="{{route('index.send')}}" class="wow fadeInDown" data-wow-delay="1s">
                         @csrf
 
                         <div class="controls" id="contact-form">
@@ -454,13 +460,15 @@
 
     <div class="brand-area section-padding">
         <div class="container">
-                
-                <div class="col-md-3 col-xs-6 col-sm-3">
-                    <div class="brand-logo-img wow fadeInDown" data-wow-delay="0.2s">
-                        <img src="https://cdn.dribbble.com/userupload/3158902/file/original-7c71bfa677e61dea61bc2acd59158d32.jpg?resize=400x0" width="70" alt="brand image"> 
-                    </div>
-                </div>
-               
+                @if($logos->count()>0)
+                    @foreach($logos as $logo)
+                        <div class="col-md-3 col-xs-6 col-sm-3">
+                            <div class="brand-logo-img wow fadeInDown" data-wow-delay="0.2s">
+                                <img src="{{$logo['image']}}" width="70" alt="brand image"> 
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
         </div>
     </div>
 

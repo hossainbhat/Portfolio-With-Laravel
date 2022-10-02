@@ -62,7 +62,7 @@
                             <td>{{$contact['name']}}</td>
                             <td>{{$contact['email']}}</td>
                             <td>{{$contact['subject']}}</td>
-                            <td><a class="confirmDelete" record="contact" recoedid="{{$contact->id}}" href="javascript:void('0')"><button class="btn btn-danger btn-sm">Delete</button></a></td>
+                            <td><a href="{{route('admin.contact.view',$contact['id'])}}" class="btn btn-warning btn-sm">View</a> <a class="confirmDelete" record="contact" recoedid="{{$contact->id}}" href="javascript:void('0')"><button class="btn btn-danger btn-sm">Delete</button></a></td>
                         </tr>
                       @endforeach
                     @endif 

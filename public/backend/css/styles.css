@@ -15493,7 +15493,7 @@ html[data-color=dark-purple] .logo .img,
 html[data-color=dark-lime] .logo .img,
 html[data-color=dark-sky] .logo .img,
 html[data-color=dark-teal] .logo .img {
-  background-image: url(../img/logo/logo-light.svg);
+  background-image: url(../img/logo/favicon-32x32.png);
 }
 
 html[data-color=light-sky] .logo-default {
