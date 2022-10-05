@@ -1,7 +1,7 @@
 @php
     $html_tag_data = [];
-    $title = 'Skill List';
-    $description= 'Skill for Admin';
+    $title = $name;
+    $description= $name.' for Admin';
 @endphp
 @extends('layouts.admin_layouts.master',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 @section("content")

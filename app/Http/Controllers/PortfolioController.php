@@ -4,21 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Portfolio;
+use Session;
 use Image;
 
 class PortfolioController extends Controller
 {
+    //get portfolio
     public function portfolios(){
+        Session::put('page','portfolio');
         $portfolios = Portfolio::latest()->get();
         return view('admin.portfolio.portfolios',compact('portfolios'));
     }
+    //add edit portfolio
     public function addEditPortfolio(Request $request, $id=null){
         if ($id=="") {
+            Session::put('page','addPortfolio');
             $name ="Add Portfolio";
             $portfolio = new Portfolio;
             $portfoliodata = array();
             $message ="Portfolio Add Successfully!";
         }else{
+            Session::put('page','editPortfolio');
             $name ="Edit Portfolio";
             $portfoliodata = Portfolio::where('id',$id)->first();
 
@@ -30,14 +36,14 @@ class PortfolioController extends Controller
 			// echo "<pre>"; print_r($data); die;
             $rulse = [
                 'title' => 'required',
-                'link' => 'required',
+                'link'  => 'required',
                 'image' => 'image',
             ];
 
             $customMessage = [
                 'title.required' =>'title is required',
-                'link.required' =>'url is required',
-                'image.image' =>'Valid image is required',
+                'link.required'  =>'url is required',
+                'image.image'    =>'Valid image is required',
             ];
 
             $this->validate($request,$rulse,$customMessage);
@@ -58,10 +64,10 @@ class PortfolioController extends Controller
                 $data['description'] = "";
             }
 
-            $portfolio->title = $data['title'];
+            $portfolio->title       = $data['title'];
             $portfolio->description = $data['description'];
-            $portfolio->link = $data['link'];
-            $portfolio->status = 1;
+            $portfolio->link        = $data['link'];
+            $portfolio->status      = 1;
             $portfolio->save();
 
             toastr()->success($message);
@@ -69,7 +75,7 @@ class PortfolioController extends Controller
         }
         return view('admin.portfolio.addEditPortfolio')->with(compact('name','portfoliodata'));
     }
-
+    //delete porfolio
     public function deletePortfolio($id=null){
         $portfolioImage = Portfolio::select('image')->where('id',$id)->first();
 
@@ -81,7 +87,7 @@ class PortfolioController extends Controller
         toastr()->success('Portfolio has been deleted Successfully');
         return redirect("admin/portfolios");
     }
-
+    //delete portfolio image
     public function deletePortfolioImage($id=null){
         $portfolioImage = Portfolio::select('image')->where('id',$id)->first();
 
@@ -93,7 +99,7 @@ class PortfolioController extends Controller
         toastr()->success("Portfolio Image has been deleted Successfully!");
         return redirect()->back();
     }
-
+    //portfolio status update
     public function updatePorfolioStatus(Request $request){
         if ($request->ajax()) {
             $data = $request->all();
@@ -106,5 +112,9 @@ class PortfolioController extends Controller
             Portfolio::where('id',$data['portfolio_id'])->update(['status'=>$status]);
             return response()->json(['status'=>$status,'portfolio_id'=>$data['portfolio_id']]);
         }
+    }
+    //search porfolio
+    public function PorfolioSearch(){
+
     }
 }

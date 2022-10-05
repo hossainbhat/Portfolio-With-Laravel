@@ -1,7 +1,7 @@
 @php
     $html_tag_data = [];
-    $title = 'Dashboard';
-    $description= 'Dashboard for Admin';
+    $title = 'Email List';
+    $description= 'Email List for Admin';
 @endphp
 @extends('layouts.admin_layouts.master',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 @section("content")
@@ -19,11 +19,11 @@
               <div class="row">
                 <!-- Title Start -->
                 <div class="col-12 col-md-7">
-                  <h1 class="mb-0 pb-0 display-4" id="title">Contact List</h1>
+                  <h1 class="mb-0 pb-0 display-4" id="title">Email List</h1>
                   <nav class="breadcrumb-container d-inline-block" aria-label="breadcrumb">
                     <ul class="breadcrumb pt-0">
                       <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
-                      <li class="breadcrumb-item"><a href="{{route('admin.logos')}}">Contacts</a></li>
+                      <li class="breadcrumb-item"><a href="{{route('admin.logos')}}">Emails</a></li>
                     </ul>
                   </nav>
                 </div>
@@ -41,10 +41,11 @@
               <!-- Controls Start -->
              
               <!-- Controls End -->
-
+              <h1 class="mb-0 pb-0 display-4 text-center">Unseen Email</h1>
+              <hr>
               <!-- Table Start -->
               <div class="data-table-responsive-wrapper">
-                <table id="skill" class="data-table nowrap hover">
+                <table id="unseenContact" class="data-table nowrap hover">
                   <thead>
                     <tr>
                       <th class="text-muted text-small text-uppercase" width="10%">ID</th>
@@ -55,14 +56,43 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @if($contacts->count()>0)
-                      @foreach($contacts as $key=>$contact)
+                    @if($unseenContacts->count()>0)
+                      @foreach($unseenContacts as $key=>$contact)
                         <tr>
                             <td>{{$key+1}}</td>
                             <td>{{$contact['name']}}</td>
                             <td>{{$contact['email']}}</td>
                             <td>{{$contact['subject']}}</td>
-                            <td><a href="{{route('admin.contact.view',$contact['id'])}}" class="btn btn-warning btn-sm">View</a> <a class="confirmDelete" record="contact" recoedid="{{$contact->id}}" href="javascript:void('0')"><button class="btn btn-danger btn-sm">Delete</button></a></td>
+                            <td><a href="{{route('admin.contact.view',$contact['id'])}}" class="btn btn-primary btn-sm"><i class="fa-solid fa-eye"></i></a> <a class="confirmDelete" record="contact" recoedid="{{$contact->id}}" href="javascript:void('0')"><button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button></a></td>
+                        </tr>
+                      @endforeach
+                    @endif 
+                </tbody>
+                </table>
+              </div>
+              <hr>
+              <h1 class="mb-0 pb-0 display-4 text-center">Seen Email</h1>
+              <hr>
+              <div class="data-table-responsive-wrapper">
+                <table id="seenContact" class="data-table nowrap hover">
+                  <thead>
+                    <tr>
+                      <th class="text-muted text-small text-uppercase" width="10%">ID</th>
+                      <th class="text-muted text-small text-uppercase">Name</th>
+                      <th class="text-muted text-small text-uppercase">Email</th>
+                      <th class="text-muted text-small text-uppercase">Subject</th>
+                      <th class="text-muted text-small text-uppercase" width="15%">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @if($seenContacts->count()>0)
+                      @foreach($seenContacts as $key=>$contact)
+                        <tr>
+                            <td>{{$key+1}}</td>
+                            <td>{{$contact['name']}}</td>
+                            <td>{{$contact['email']}}</td>
+                            <td>{{$contact['subject']}}</td>
+                            <td><a href="{{route('admin.contact.view',$contact['id'])}}" class="btn btn-primary btn-sm"><i class="fa-solid fa-eye"></i></a> <a class="confirmDelete" record="contact" recoedid="{{$contact->id}}" href="javascript:void('0')"><button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button></a></td>
                         </tr>
                       @endforeach
                     @endif 
@@ -73,68 +103,7 @@
             </div>
             <!-- Content End -->
 
-            <!-- Add Edit Modal Start -->
-            <div class="modal modal-right fade" id="addEditModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitle">Add New</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <form>
-                      <div class="mb-3">
-                        <label class="form-label">Name</label>
-                        <input name="Name" type="text" class="form-control" />
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Sales</label>
-                        <input name="Sales" type="number" class="form-control" />
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Stock</label>
-                        <input name="Stock" type="number" class="form-control" />
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Category</label>
-                        <div class="form-check">
-                          <input type="radio" id="category1" name="Category" value="Whole Wheat" class="form-check-input" />
-                          <label class="form-check-label" for="category1">Whole Wheat</label>
-                        </div>
-                        <div class="form-check">
-                          <input type="radio" id="category2" name="Category" value="Sourdough" class="form-check-input" />
-                          <label class="form-check-label" for="category2">Sourdough</label>
-                        </div>
-                        <div class="form-check">
-                          <input type="radio" id="category3" name="Category" value="Multigrain" class="form-check-input" />
-                          <label class="form-check-label" for="category3">Multigrain</label>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Tag</label>
-                        <div class="form-check">
-                          <input type="radio" id="tag1" name="Tag" value="New" class="form-check-input" />
-                          <label class="form-check-label" for="tag1">New</label>
-                        </div>
-                        <div class="form-check">
-                          <input type="radio" id="tag2" name="Tag" value="Sale" class="form-check-input" />
-                          <label class="form-check-label" for="tag2">Sale</label>
-                        </div>
-                        <div class="form-check">
-                          <input type="radio" id="tag3" name="Tag" value="Done" class="form-check-input" />
-                          <label class="form-check-label" for="tag3">Done</label>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="addEditConfirmButton">Add</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Add Edit Modal End -->
+            
           </div>
         <!-- Page Content End -->
       </div>
@@ -144,7 +113,8 @@
  @section("script_js")
 <script>
 $(document).ready( function () {
-    $('#skill').DataTable();
+    $('#unseenContact').DataTable();
+    $('#seenContact').DataTable();
 } );
 </script>
 @endsection

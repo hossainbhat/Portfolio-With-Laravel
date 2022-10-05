@@ -18,6 +18,7 @@
     <!-- Vendor Styles Start -->
     <link rel="stylesheet" href="{{asset('backend/css/vendor/bootstrap.min.css')}}" />
     <link rel="stylesheet" href="{{asset('backend/css/vendor/OverlayScrollbars.min.css')}}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
     <!-- Vendor Styles End -->
     <!-- Template Base Styles Start -->

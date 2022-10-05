@@ -156,7 +156,7 @@
                         <h2>{{$user['name']}}</h2> <!--edit name-->
                         <h3>{{$user['designation']}}</h3> <!--edit designation-->
                         <p style="word-break: break-all;">{{$user['bio']}}</p>
-                        <a href="{{asset($user['cv'])}}" target="_blanck">Download CV &nbsp; &nbsp;<i class="fa fa-download"></i></a>
+                        <a href="{{asset($user['cv'])}}" target="__blanck">Download CV &nbsp; &nbsp;<i class="fa fa-download"></i></a>
                     </div>
                    
                 </div>

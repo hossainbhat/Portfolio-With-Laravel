@@ -4,22 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Testmonial;
+use Session;
 use Image;
 
 class TestmonialController extends Controller
 {
+    //get testmonial
     public function testmonials(){
+        Session::put('page','testimonial');
         $testmonials = Testmonial::latest()->get();
         return view('admin.testmonial.testmonials',compact('testmonials'));
     }
-
+    //add edit testimonial
     public function addEditTestminial(Request $request, $id=null){
         if ($id=="") {
+            Session::put('page','addTestimonial');
             $name ="Add Testmonial";
             $testmonial = new Testmonial;
             $testmonialdata = array();
             $message ="Portfolio Add Successfully!";
         }else{
+            Session::put('page','editTestimonial');
             $name ="Edit Testmonial";
             $testmonialdata = Testmonial::where('id',$id)->first();
 
@@ -30,15 +35,15 @@ class TestmonialController extends Controller
             $data = $request->all();
 			// echo "<pre>"; print_r($data); die;
             $rulse = [
-                'name' => 'required',
-                'company' => 'required',
-                'image' => 'image',
+                'name'      => 'required',
+                'company'   => 'required',
+                'image'     => 'image',
             ];
 
             $customMessage = [
-                'name.required' =>'name is required',
-                'company.required' =>'company is required',
-                'image.image' =>'Valid image is required',
+                'name.required'     =>'name is required',
+                'company.required'  =>'company is required',
+                'image.image'       =>'Valid image is required',
             ];
 
             $this->validate($request,$rulse,$customMessage);
@@ -59,10 +64,10 @@ class TestmonialController extends Controller
                 $data['description'] = "";
             }
 
-            $testmonial->name = $data['name'];
-            $testmonial->company = $data['company'];
-            $testmonial->description = $data['description'];
-            $testmonial->status = 1;
+            $testmonial->name           = $data['name'];
+            $testmonial->company        = $data['company'];
+            $testmonial->description    = $data['description'];
+            $testmonial->status         = 1;
             $testmonial->save();
 
             toastr()->success($message);
@@ -70,7 +75,7 @@ class TestmonialController extends Controller
         }
         return view('admin.testmonial.addEditTestmonial')->with(compact('name','testmonialdata'));
     }
-
+    //delete testmonial
     public function deleteTestmonial($id){
         $portfolioImage = Testmonial::select('image')->where('id',$id)->first();
 
@@ -82,7 +87,7 @@ class TestmonialController extends Controller
         toastr()->success('Testmonial has been deleted Successfully');
         return redirect("admin/testmonials");
     }
-
+    //delete testimonial image
     public function deleteTestmonialImage($id){
         $portfolioImage = Testmonial::select('image')->where('id',$id)->first();
 
@@ -94,6 +99,7 @@ class TestmonialController extends Controller
         toastr()->success("Testmonial Image has been deleted Successfully!");
         return redirect()->back();
     }
+    //testimonial status update
     public function updateTestmonialStatus(Request $request){
         if ($request->ajax()) {
             $data = $request->all();

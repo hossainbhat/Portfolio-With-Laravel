@@ -36,6 +36,7 @@ Route::prefix('/admin')->namespace('App\Http\Controllers')->group(function(){
         Route::get('/delete-portfolio/{id}','PortfolioController@deletePortfolio')->name('admin.portfolio.delete');
         Route::get('/delete-porfolioImage/{id}','PortfolioController@deletePortfolioImage')->name('admin.porfolioImage.delete');
         Route::post('update-portfolio-status','PortfolioController@updatePorfolioStatus')->name('admin.portfolio.status');
+        Route::post('portfolio-search','PortfolioController@PorfolioSearch')->name('admin.portfolio.serch');
         //service
         Route::get('/services','ServiceController@services')->name('admin.services');
         Route::match(['get','post'],'/add-edit-service/{id?}','ServiceController@addEditService')->name('admin.addEdit.service');

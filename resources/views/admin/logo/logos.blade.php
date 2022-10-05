@@ -1,7 +1,7 @@
 @php
     $html_tag_data = [];
-    $title = 'Logo';
-    $description= 'Logo for Admin';
+    $title = 'Logo List';
+    $description= 'Logo List for Admin';
 @endphp
 @extends('layouts.admin_layouts.master',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 @section("content")
@@ -74,8 +74,8 @@
                             @endif
                           </td>
                           <td>
-                            <a href="{{route('admin.addEdit.logo',$logo['id'] )}}"><button class="btn btn-primary btn-sm">Edit</button></a> 
-                            <a class="confirmDelete" record="logo" recoedid="{{$logo->id}}" href="javascript:void('0')"><button class="btn btn-danger btn-sm">Delete</button></a>
+                            <a href="{{route('admin.addEdit.logo',$logo['id'] )}}"><button class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></button></a> 
+                            <a class="confirmDelete" record="logo" recoedid="{{$logo->id}}" href="javascript:void('0')"><button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button></a>
                           </td>
                       </tr>
                       @endforeach

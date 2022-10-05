@@ -24,7 +24,7 @@
                 Your Porfolio Login and update your Information ...
               </p>
               <div class="mb-5">
-                <a class="btn btn-lg btn-outline-white" href="#">My Portfolio</a>
+                <a class="btn btn-lg btn-outline-white" href="{{route('index')}}">My Portfolio</a>
               </div>
             </div>
           </div>
@@ -36,11 +36,7 @@
       <div class="col-12 col-lg-auto h-100 pb-4 px-4 pt-0 p-lg-0">
         <div class="sw-lg-70 min-h-100 bg-foreground d-flex justify-content-center align-items-center shadow-deep py-5 full-page-content-right-border">
           <div class="sw-lg-50 px-5">
-            <div class="sh-11">
-              <a href="#">
-                <div class="logo-default"></div>
-              </a>
-            </div>
+            
             <div class="mb-5">
               <h2 class="cta-1 mb-0 text-primary">Welcome,</h2>
               <h2 class="cta-1 text-primary">let's get started!</h2>

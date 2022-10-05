@@ -33,13 +33,13 @@
                 <img src="{{asset('backend/img/illustration/database.webp')}}" class="card-img h-100 position-absolute theme-filter" alt="card image" />
                 <div class="card-img-overlay d-flex flex-column justify-content-end bg-transparent">
                   <div class="mb-4">
-                    <div class="cta-1 mb-2 w-75 w-sm-50">Introduction to Cloud</div>
-                    <div class="w-50 text-alternate">Lollipop chocolate marzipan marshmallow gummi bears. Tootsie roll liquorice cake jelly beans.</div>
+                    <div class="cta-1 mb-2 w-75 w-sm-50">{{Auth::user()->name}}</div>
+                    <div class="w-50 text-alternate">{{Auth::user()->bio}}</div>
                   </div>
                   <div>
-                    <a href="Services.Database.html" class="btn btn-icon btn-icon-start btn-primary mt-3 stretched-link">
+                    <a href="{{route('admin.profile')}}" class="btn btn-icon btn-icon-start btn-primary mt-3 stretched-link">
                       <i data-acorn-icon="chevron-right"></i>
-                      <span>Getting Started</span>
+                      <span>Profile</span>
                     </a>
                   </div>
                 </div>
@@ -56,14 +56,14 @@
                       <div class="col-auto">
                         <div class="sw-9 sh-9 d-inline-block d-flex justify-content-center align-items-center">
                           <div class="fw-bold text-primary">
-                            <i data-acorn-icon="server"></i>
+                            <i class="fa-solid fa-envelope"></i>
                           </div>
                         </div>
                       </div>
                       <div class="col">
                         <div class="card-body d-flex flex-column ps-0 pt-0 pb-0 h-100 justify-content-center">
                           <div class="d-flex flex-column">
-                            <div class="text-alternate">Total Email (20)</div>
+                            <div class="text-alternate">Total Email ({{$contact}})</div>
                             <div class="text-small text-muted">Clint Mail your.</div>
                           </div>
                         </div>
@@ -75,14 +75,14 @@
                       <div class="col-auto">
                         <div class="sw-9 sh-9 d-inline-block d-flex justify-content-center align-items-center">
                           <div class="fw-bold text-primary">
-                            <i data-acorn-icon="cloud-download"></i>
+                            <i class="fa-solid fa-tag"></i>
                           </div>
                         </div>
                       </div>
                       <div class="col">
                         <div class="card-body d-flex flex-column ps-0 pt-0 pb-0 h-100 justify-content-center">
                           <div class="d-flex flex-column">
-                            <div class="text-alternate">Total Skill (20)</div>
+                            <div class="text-alternate">Total Skill ({{$skill}})</div>
                             <div class="text-small text-muted">Your Skill Samary</div>
                           </div>
                         </div>
@@ -94,14 +94,14 @@
                       <div class="col-auto">
                         <div class="sw-9 sh-9 d-inline-block d-flex justify-content-center align-items-center">
                           <div class="fw-bold text-primary">
-                            <i data-acorn-icon="shield"></i>
+                            <i class="fa-solid fa-layer-group"></i>
                           </div>
                         </div>
                       </div>
                       <div class="col">
                         <div class="card-body d-flex flex-column ps-0 pt-0 pb-0 h-100 justify-content-center">
                           <div class="d-flex flex-column">
-                            <div class="text-alternate">Total Portfolio (10)</div>
+                            <div class="text-alternate">Total Portfolio ({{$portfolio}})</div>
                             <div class="text-small text-muted">Your Portfolio Samary.</div>
                           </div>
                         </div>
@@ -113,14 +113,14 @@
                       <div class="col-auto">
                         <div class="sw-9 sh-9 d-inline-block d-flex justify-content-center align-items-center">
                           <div class="fw-bold text-primary">
-                            <i data-acorn-icon="chart-4"></i>
+                            <i class="fa-brands fa-servicestack"></i>
                           </div>
                         </div>
                       </div>
                       <div class="col">
                         <div class="card-body d-flex flex-column ps-0 pt-0 pb-0 h-100 justify-content-center">
                           <div class="d-flex flex-column">
-                            <div class="text-alternate">Total Service (5)</div>
+                            <div class="text-alternate">Total Service ({{$service}})</div>
                             <div class="text-small text-muted">Your Service Samary.</div>
                           </div>
                         </div>
@@ -132,14 +132,14 @@
                       <div class="col-auto">
                         <div class="sw-9 sh-9 d-inline-block d-flex justify-content-center align-items-center">
                           <div class="fw-bold text-primary">
-                            <i data-acorn-icon="category"></i>
+                            <i class="fa-brands fa-creative-commons-share"></i>
                           </div>
                         </div>
                       </div>
                       <div class="col">
                         <div class="card-body d-flex flex-column ps-0 pt-0 pb-0 h-100 justify-content-center">
                           <div class="d-flex flex-column">
-                            <div class="text-alternate">Total Logo (5)</div>
+                            <div class="text-alternate">Total Logo ({{$logo}})</div>
                             <div class="text-small text-muted">You Number of Company work .</div>
                           </div>
                         </div>
@@ -151,14 +151,14 @@
                       <div class="col-auto">
                         <div class="sw-9 sh-9 d-inline-block d-flex justify-content-center align-items-center">
                           <div class="fw-bold text-primary">
-                            <i data-acorn-icon="category"></i>
+                            <i class="fa-solid fa-comment"></i>
                           </div>
                         </div>
                       </div>
                       <div class="col">
                         <div class="card-body d-flex flex-column ps-0 pt-0 pb-0 h-100 justify-content-center">
                           <div class="d-flex flex-column">
-                            <div class="text-alternate">Total Tesmonial (5)</div>
+                            <div class="text-alternate">Total Tesmonial ({{$testmonial}})</div>
                             <div class="text-small text-muted">Clint Feedback .</div>
                           </div>
                         </div>

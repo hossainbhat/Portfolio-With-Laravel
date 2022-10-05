@@ -4,24 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Logo;
-use Image;
 use Session;
+use Image;
 
 class LogoController extends Controller
 {
+    //get logo
     public function logos(){
+        Session::put('page','logo');
         $logos = Logo::latest()->get();
         return view('admin.logo.logos',compact('logos'));
     }
-
+    //add edit logo
     public function addEditLogo(Request $request, $id=null){
     	if ($id=="") {
-            Session::put('page','add_logo');
+            Session::put('page','addLogo');
             $name ="Add Logo";
             $logo = new Logo;
             $logodata = array();
             $message ="Logo Add Successfully!";
         }else{
+            Session::put('page','editLogo');
             $name ="Edit Logo";
             $logodata = Logo::where('id',$id)->first();
 
@@ -61,7 +64,7 @@ class LogoController extends Controller
        
         return view('admin.logo.addEditlogo')->with(compact('name','logodata'));
     }
-
+    //delete logo
     public function deleteLogo($id){
         $logoImage = Logo::select('image')->where('id',$id)->first();
 
@@ -72,7 +75,7 @@ class LogoController extends Controller
         toastr()->success('Logo has been deleted Successfully');
         return redirect()->back();
     }
-
+    //delete logo image
     public function deleteLogoImage($id){
         $logoImage = Logo::select('image')->where('id',$id)->first();
 
@@ -84,7 +87,7 @@ class LogoController extends Controller
         toastr()->success("Logo Image has been deleted Successfully!");
         return redirect()->back();
     }
-
+    //logo status update
     public function updateLogoStatus(Request $request){
         if ($request->ajax()) {
             $data = $request->all();

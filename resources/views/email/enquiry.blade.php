@@ -1,7 +1,7 @@
 
 <html>
 	<head>
-		<title>Enquiry Email</title>
+		<title>Md Hossain Bhat | Porfolio Email</title>
 	</head>
 	<body>
 		<table>

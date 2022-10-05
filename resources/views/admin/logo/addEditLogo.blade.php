@@ -1,7 +1,7 @@
 @php
     $html_tag_data = [];
-    $title = 'Logo List';
-    $description= 'Logo for Admin';
+    $title = $name;
+    $description= $name.' for Admin';
 @endphp
 @extends('layouts.admin_layouts.master',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 @section("content")
@@ -44,7 +44,7 @@
                         <div style="height: 90px;">
                             <img style="width: 60px; margin-top: 5px;" src="{{asset($logodata['image'])}}" >
                             &nbsp;
-                            <a class="confirmDelete" record="logoImage" recoedid="{{$logodata->id}}" href="javascript:void('0')">Delete</a>
+                            <a class="confirmDelete btn btn-danger btn-sm" record="logoImage" recoedid="{{$logodata->id}}" href="javascript:void('0')"><i class="fa-solid fa-trash"></i></a>
                         </div>
                       @endif
                       </div>

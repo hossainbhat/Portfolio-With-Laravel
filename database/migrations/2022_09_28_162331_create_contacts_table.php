@@ -19,6 +19,7 @@ class CreateContactsTable extends Migration
             $table->string('subject');
             $table->string('email');
             $table->longText('message')->nullable();
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
         });
     }

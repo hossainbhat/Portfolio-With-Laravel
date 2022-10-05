@@ -50,12 +50,7 @@
       <!-- Icons Menu Start -->
       <ul class="list-unstyled list-inline text-center menu-icons">
         
-        <li class="list-inline-item">
-          <a href="#" id="pinButton" class="pin-button">
-            <i data-acorn-icon="lock-on" class="unpin" data-acorn-size="18"></i>
-            <i data-acorn-icon="lock-off" class="pin" data-acorn-size="18"></i>
-          </a>
-        </li>
+       
         <li class="list-inline-item">
           <a href="#" id="colorButton">
             <i data-acorn-icon="light-on" class="light" data-acorn-size="18"></i>
@@ -73,29 +68,12 @@
             <div class="scroll">
               <ul class="list-unstyled border-last-none">
                 <li class="mb-3 pb-3 border-bottom border-separator-light d-flex">
-                  <img src="{{asset('backend/img/profile/profile-1.webp')}}" class="me-3 sw-4 sh-4 rounded-xl align-self-center" alt="..." />
+                  <i class="fa-solid fa-envelope"></i> &nbsp;&nbsp;
                   <div class="align-self-center">
                     <a href="#">Joisse Kaycee just sent a new comment!</a>
                   </div>
                 </li>
-                <li class="mb-3 pb-3 border-bottom border-separator-light d-flex">
-                  <img src="{{asset('backend/img/profile/profile-2.webp')}}" class="me-3 sw-4 sh-4 rounded-xl align-self-center" alt="..." />
-                  <div class="align-self-center">
-                    <a href="#">New order received! It is total $147,20.</a>
-                  </div>
-                </li>
-                <li class="mb-3 pb-3 border-bottom border-separator-light d-flex">
-                  <img src="{{asset('backend/img/profile/profile-3.webp')}}" class="me-3 sw-4 sh-4 rounded-xl align-self-center" alt="..." />
-                  <div class="align-self-center">
-                    <a href="#">3 items just added to wish list by a user!</a>
-                  </div>
-                </li>
-                <li class="pb-3 pb-3 border-bottom border-separator-light d-flex">
-                  <img src="{{asset('backend/img/profile/profile-6.webp')}}" class="me-3 sw-4 sh-4 rounded-xl align-self-center" alt="..." />
-                  <div class="align-self-center">
-                    <a href="#">Kirby Peters just sent a new message!</a>
-                  </div>
-                </li>
+                
               </ul>
             </div>
           </div>
@@ -108,7 +86,7 @@
         <ul id="menu" class="menu">
           <li>
             <a href="{{route('index')}}" target="_blanck">
-              <i data-acorn-icon="trend-up" class="icon" data-acorn-size="18"></i>
+              <i class="fa-solid fa-desktop icon"></i>
               <span class="label">Website</span>
             </a>
           </li>

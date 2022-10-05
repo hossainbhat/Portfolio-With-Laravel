@@ -8,18 +8,23 @@ use Session;
 
 class SkillController extends Controller
 {
+    //get skill
     public function skills(){
+        Session::put('page','skill');
         $skills = Skill::latest()->get();
         return view('admin.skill.skills')->with(compact('skills'));
     }
+    //add edit skill
     public function addEditSkill(Request $request,$id=null){
         if ($id=="") {
-               $name        ="Add Skill";
+                Session::put('page','addSkill');
+               $name  ="Add Skill";
                $skill       = new Skill;
                $skilldata   = array();
                $getskills   = array();
-               $message     ="Skill Add Successfully!";
+               $message ="Skill Add Successfully!";
         }else{
+                Session::put('page','editSkill');
                $name ="Edit Skill";
                $skilldata = Skill::where('id',$id)->first();
                $getskills = Skill::get();
@@ -31,19 +36,19 @@ class SkillController extends Controller
                $data = $request->all();
             //    echo "<pre>"; print_r($data); die;
                $rulse = [
-                   'title'       => 'required',
-                   'persent'    => 'required',
+                   'title'    => 'required|string',
+                   'persent'  => 'required|number',
                ];
     
                $customMessage = [
-                   'title.required'      =>'Title is required',
-                   'persent.required'   =>'Persent is required',
+                   'title.required'   =>'Title is required',
+                   'persent.required' =>'Persent is required',
                ];
     
                $this->validate($request,$rulse,$customMessage);
     
     
-               $skill->title     = $data['title'];
+               $skill->title    = $data['title'];
                $skill->persent  = $data['persent'];
                $skill->status   = 1;
                $skill->save();
@@ -53,14 +58,13 @@ class SkillController extends Controller
         }
         return view('admin.skill.addEditSkill')->with(compact('name','skilldata','getskills'));
     }
-
-
-
+    //delete skill
     public function deleteSkill($id){
         Skill::where('id',$id)->delete();
         toastr()->success('Skill has been deleted Successfully');
         return redirect("admin/skills");
     }
+    //skill status update
     public function updateSkillStatus(Request $request){
         if ($request->ajax()) {
             $data = $request->all();

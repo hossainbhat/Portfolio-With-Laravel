@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Document</title>
+    <title>Md Hossain Bhat | Porfolio -Forgot Password</title>
 </head>
 <body>
     <table>
