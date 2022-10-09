@@ -21,13 +21,11 @@ class SkillController extends Controller
                $name  ="Add Skill";
                $skill       = new Skill;
                $skilldata   = array();
-               $getskills   = array();
                $message ="Skill Add Successfully!";
         }else{
                 Session::put('page','editSkill');
                $name ="Edit Skill";
                $skilldata = Skill::where('id',$id)->first();
-               $getskills = Skill::get();
     
                $skill   = Skill::find($id);
                $message ="Skill Update Successfully!";
@@ -36,27 +34,27 @@ class SkillController extends Controller
                $data = $request->all();
             //    echo "<pre>"; print_r($data); die;
                $rulse = [
-                   'title'    => 'required|string',
-                   'persent'  => 'required|number',
+                   'title'     => 'required|string',
+                    'persent'  => 'required'
                ];
     
                $customMessage = [
-                   'title.required'   =>'Title is required',
-                   'persent.required' =>'Persent is required',
+                   'title.required'    =>'Title is required',
+                   'persent	.required' =>'Persent is required'
                ];
     
                $this->validate($request,$rulse,$customMessage);
     
     
                $skill->title    = $data['title'];
-               $skill->persent  = $data['persent'];
+               $skill->persent	= $data['persent'];
                $skill->status   = 1;
                $skill->save();
     
                toastr()->success($message);
                return redirect("admin/skills");
         }
-        return view('admin.skill.addEditSkill')->with(compact('name','skilldata','getskills'));
+        return view('admin.skill.addEditSkill')->with(compact('name','skilldata'));
     }
     //delete skill
     public function deleteSkill($id){

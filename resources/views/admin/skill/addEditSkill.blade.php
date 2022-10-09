@@ -34,8 +34,9 @@
                 
                 <div class="card mb-5">
                   <div class="card-body">
+                    @include('message.danger')
                     <!-- tooltip-label-end inputs should be wrapped in form-group class -->
-                    <form id="exampleForm" class="tooltip-label-end" novalidate="novalidate" @if(empty($skilldata['id'])) action="{{url('admin/add-edit-skill')}}" @else   action="{{url('admin/add-edit-skill/'.$skilldata['id'] )}}" @endif method="post">
+                    <form id="exampleForm" class="tooltip-label-end" novalidate="novalidate" @if(empty($skilldata['id'])) action="{{route('admin.addEdit.skill')}}" @else   action="{{route('admin.addEdit.skill',$skilldata['id'] )}}" @endif method="post">
                         @csrf 
                       <div class="mb-3 position-relative form-group">
                         <label class="form-label">Title</label>
@@ -45,14 +46,6 @@
                         <label class="form-label">Percentage</label>
                         <input type="text" class="form-control" name="persent" placeholder="Enter Percentage" @if(!empty($skilldata['persent'])) value="{{$skilldata['persent']}}" @else value="{{ old('persent')}}" @endif>
                       </div>
-                      
-                      {{-- <div class="mb-3 position-relative form-group">
-                        <label class="form-label">Status</label>
-                        <div class="form-check">
-                          <input type="checkbox" name="status" class="form-check-input" id="basicValidationCheckboxSingle">
-                          <label class="form-check-label" for="basicValidationCheckboxSingle">Status</label>
-                        </div>
-                      </div> --}}
                       <button type="submit" class="btn btn-primary mb-0">{{$name}}</button>
                     </form>
                   </div>

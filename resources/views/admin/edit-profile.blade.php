@@ -124,6 +124,7 @@
           <h2 class="small-title">Edit User Info</h2>
           <div class="card mb-5">
             <div class="card-body">
+              @include('message.danger')
               <form action="{{route('admin.profile.update')}}" method="post" enctype="multipart/form-data">
                 @csrf 
                 <div class="mb-3 row">

@@ -136,7 +136,7 @@ class UserController extends Controller
                     $extention = $image_temp->getClientOriginalExtension();
                     $imageName = rand(111,99999).'.'.$extention;
                     $imagePath = 'uploads/images/profile/'.$imageName;
-                    Image::make($image_temp)->resize(150,150)->save($imagePath);
+                    Image::make($image_temp)->resize(512,512)->save($imagePath);
                 }
             }else if (!empty($data['image'])){
                 $imagePath = $data['image'];

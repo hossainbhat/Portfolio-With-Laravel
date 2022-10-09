@@ -11,7 +11,7 @@
       @endif
       <li>
         <a href="{{route('admin.dashboard')}}" class="{{$active}}">
-          <i class="fa-solid fa-tag"></i>
+          <i class="fa-brands fa-windows"></i>
           <span class="label">Dashboard</span>
         </a>
       </li>

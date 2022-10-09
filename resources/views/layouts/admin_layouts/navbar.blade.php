@@ -67,13 +67,15 @@
           <div class="dropdown-menu dropdown-menu-end wide notification-dropdown scroll-out" id="notifications">
             <div class="scroll">
               <ul class="list-unstyled border-last-none">
+               
+                
                 <li class="mb-3 pb-3 border-bottom border-separator-light d-flex">
                   <i class="fa-solid fa-envelope"></i> &nbsp;&nbsp;
                   <div class="align-self-center">
-                    <a href="#">Joisse Kaycee just sent a new comment!</a>
+                    <a href="#">ok</a>
                   </div>
                 </li>
-                
+              
               </ul>
             </div>
           </div>

@@ -51,7 +51,7 @@ class LogoController extends Controller
                     $extention = $image_temp->getClientOriginalExtension();
                     $imageName = rand(111,99999).'.'.$extention;
                     $imagePath = 'uploads/images/logo/'.$imageName;
-                    Image::make($image_temp)->save($imagePath);
+                    Image::make($image_temp)->resize(512,512)->save($imagePath);
                     $logo->image = $imagePath;
                }
             }

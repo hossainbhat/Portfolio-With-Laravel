@@ -34,6 +34,7 @@
                 
                 <div class="card mb-5">
                   <div class="card-body">
+                    @include('message.danger')
                     <!-- tooltip-label-end inputs should be wrapped in form-group class -->
                     <form id="exampleForm" class="tooltip-label-end" novalidate="novalidate" @if(empty($portfoliodata['id'])) action="{{route('admin.addEdit.portfolio')}}" @else   action="{{route('admin.addEdit.portfolio',$portfoliodata['id'] )}}" @endif method="post" enctype="multipart/form-data">
                         @csrf 

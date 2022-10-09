@@ -55,7 +55,7 @@ class PortfolioController extends Controller
                     $extention = $image_temp->getClientOriginalExtension();
                     $imageName = rand(111,99999).'.'.$extention;
                     $imagePath = 'uploads/images/portfolio/'.$imageName;
-                    Image::make($image_temp)->save($imagePath);
+                    Image::make($image_temp)->resize(1460,770)->save($imagePath);
                     $portfolio->image = $imagePath;
                }
             }

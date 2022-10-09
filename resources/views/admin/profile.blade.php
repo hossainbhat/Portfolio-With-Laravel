@@ -80,31 +80,6 @@
           <!-- Projects Tab Start -->
           <div class="tab-pane fade show active" id="projectsTab" role="tabpanel">
             <h2 class="small-title">Projects</h2>
-
-            <!-- Search Start -->
-            <form action="{{route('admin.portfolio.serch')}}" method="get">
-              @csrf 
-            <div class="row mb-3 g-2">
-              <div class="col mb-1">
-                <div class="d-inline-block float-md-start me-1 mb-1 search-input-container w-100 shadow bg-foreground">
-                  <input class="form-control" placeholder="Search" name="search">
-                  <span class="search-magnifier-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="acorn-icons acorn-icons-search undefined"><circle cx="9" cy="9" r="7"></circle><path d="M14 14L17.5 17.5"></path></svg>
-                  </span>
-                  <span class="search-delete-icon d-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="acorn-icons acorn-icons-close undefined"><path d="M5 5 15 15M15 5 5 15"></path></svg>
-                  </span>
-                </div>
-              </div>
-              <div class="col-auto text-end mb-1">
-                <div class="dropdown-as-select d-inline-block" data-childselector="span">
-                  <button type="submit" class="btn btn-md btn-success">Search</button>
-                </div>
-              </div>
-            </div>
-          </form>
-            <!-- Search End -->
-
             <!-- Projects Content Start -->
             <div class="row row-cols-1 row-cols-sm-2 g-2">
               @if($profiles->count()>0)
