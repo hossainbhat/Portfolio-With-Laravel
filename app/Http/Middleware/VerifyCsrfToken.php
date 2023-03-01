@@ -9,9 +9,9 @@ class VerifyCsrfToken extends Middleware
     /**
      * The URIs that should be excluded from CSRF verification.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $except = [
-        "admin/check-pwd","admin/update-skill-status","admin/update-service-status","admin/update-portfolio-status","admin/update-testmonial-status","admin/update-logo-status"
+        //
     ];
 }

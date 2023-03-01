@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Skill extends Model
 {
-    use HasFactory;
+    use HasFactory,CommonTrait;
     protected $fillable = [
-        'title', 'persent', 'status',
+        'title',
+        'percentage',
+        'status',
     ];
 }

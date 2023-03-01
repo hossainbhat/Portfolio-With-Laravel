@@ -3,61 +3,71 @@
 use Illuminate\Support\Facades\Route;
 
 
-
-
 Route::namespace('App\Http\Controllers')->group(function(){
-
     Route::get('/','IndexController@index')->name('index');
-    Route::post('index/send','IndexController@indexContact')->name('index.send');
-
+    Route::get('/about','IndexController@about')->name('about');
+    Route::get('/portfolio','IndexController@portfolio')->name('portfolio');
+    Route::get('/contact','IndexController@contact')->name('contact');
+    Route::get('/blog','IndexController@blog')->name('blog');
+    Route::get('/blog-details','IndexController@blogdetails')->name('blogdetails');
 });
 
-Route::prefix('/admin')->namespace('App\Http\Controllers')->group(function(){
-    Route::match(['get','post'],'/','UserController@login')->name('admin.login');
-    Route::match(['get','post'],'/forgot-password','UserController@forgotPassword')->name('admin.forgot-password');
-   
+
+
+Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function(){
+    Route::match(['get','post'],'/','AdminController@login')->name('admin.login');
+    Route::match(['get','post'],'/forgot-password','AdminController@forgotpassword')->name('admin.forgotpassword');
+
+
     Route::group(['middleware' => ['auth']],function(){
-        Route::get('/dashboard','UserController@dashboard')->name('admin.dashboard');
-        Route::get('/profile','UserController@profile')->name('admin.profile');
-        Route::match(['get','post'],'/profile/edit','UserController@updateProfile')->name('admin.profile.update');
-        Route::get('/delete-profileImage/{id}','UserController@deleteProfileImage')->name('admin.profileImage.delete');
-        Route::get('/delete-profileCV/{id}','UserController@deleteProfileCV')->name('admin.profileCV.delete');
-        Route::post('/check-pwd','UserController@chkPassword')->name('admin.check-password');
-        Route::post('/update-pwd','UserController@updatePassword')->name('admin.update-password');
-        Route::get('/logout','UserController@logout')->name('admin.logout');
-        //skill
-        Route::get('/skills','SkillController@skills')->name('admin.skill');
-        Route::match(['get','post'],'/add-edit-skill/{id?}','SkillController@addEditSkill')->name('admin.addEdit.skill');
-        Route::get('/delete-skill/{id}','SkillController@deleteSkill')->name('admin.skill.delete');
-        Route::post('update-skill-status','SkillController@updateSkillStatus')->name('admin.skill.status');
-        //portfolio
-        Route::get('/portfolios','PortfolioController@portfolios')->name('admin.portfolios');
-        Route::match(['get','post'],'/add-edit-portfolio/{id?}','PortfolioController@addEditPortfolio')->name('admin.addEdit.portfolio');
-        Route::get('/delete-portfolio/{id}','PortfolioController@deletePortfolio')->name('admin.portfolio.delete');
-        Route::get('/delete-porfolioImage/{id}','PortfolioController@deletePortfolioImage')->name('admin.porfolioImage.delete');
-        Route::post('update-portfolio-status','PortfolioController@updatePorfolioStatus')->name('admin.portfolio.status');
-        Route::post('portfolio-search','PortfolioController@PorfolioSearch')->name('admin.portfolio.serch');
-        //service
-        Route::get('/services','ServiceController@services')->name('admin.services');
-        Route::match(['get','post'],'/add-edit-service/{id?}','ServiceController@addEditService')->name('admin.addEdit.service');
-        Route::get('/delete-service/{id}','ServiceController@deleteService')->name('admin.service.delete');
-        Route::post('update-service-status','ServiceController@updateServiceStatus')->name('admin.service.status');
-        //testmonial
-        Route::get('testmonials','TestmonialController@testmonials')->name('admin.testmonials');
-        Route::match(['get','post'],'/add-edit-testmonial/{id?}','TestmonialController@addEditTestminial')->name('admin.addEdit.testmonial');
-        Route::get('/delete-testmonial/{id}','TestmonialController@deleteTestmonial')->name('admin.testmonial.delete');
-        Route::get('/delete-testmonialImage/{id}','TestmonialController@deleteTestmonialImage')->name('admin.testmonialImage.delete');
-        Route::post('update-testmonial-status','TestmonialController@updateTestmonialStatus')->name('admin.testmonial.status');
-        //logo
-        Route::get('/logos','LogoController@logos')->name('admin.logos');
-        Route::match(['get','post'],'/add-edit-logo/{id?}','LogoController@addEditLogo')->name('admin.addEdit.logo');
-        Route::get('/delete-logo/{id}','LogoController@deleteLogo')->name('admin.logo.delete');
-        Route::get('/delete-logoImage/{id}','LogoController@deleteLogoImage')->name('admin.logoImage.delete');
-        Route::post('update-logo-status','LogoController@updateLogoStatus')->name('admin.logo.status');
-        //contact
-        Route::get('contacts','ContactController@contacts')->name('admin.contacts');
-        Route::get('contact/view/{id}','ContactController@viewContact')->name('admin.contact.view');
-        Route::get('delete-contact/{id}','ContactController@deleteContact')->name('admin.contact.delete');
-    });
-});
+        Route::get('/dashboard','AdminController@dashboard')->name('admin.dashboard');
+        Route::get('/logout', 'AdminController@logout')->name('admin.logout');
 
+        //skill
+        Route::get('skill', 'SkillController@index')->name('skill.index');
+        Route::post('skill', 'SkillController@store')->name('skill.store');
+        Route::get('skill/{skill}', 'SkillController@show')->name('skill.show');
+        Route::get('skill/{skill}/edit', 'SkillController@edit')->name('skill.edit');
+        Route::post('skill/{skill}', 'SkillController@update')->name('skill.update');
+        Route::get('skill/{skill}', 'SkillController@destroy')->name('skill.destroy');
+        Route::post('update-skill-status', 'SkillController@updateSkillStatus')->name('skill.updateSkillStatus');
+
+        //experience
+        Route::get('experience', 'ExperienceController@index')->name('experience.index');
+        Route::post('experience', 'ExperienceController@store')->name('experience.store');
+        Route::get('experience/{experience}', 'ExperienceController@show')->name('experience.show');
+        Route::get('experience/{experience}/edit', 'ExperienceController@edit')->name('experience.edit');
+        Route::post('experience/{experience}', 'ExperienceController@update')->name('experience.update');
+        Route::get('experience/{experience}', 'ExperienceController@destroy')->name('experience.destroy');
+        Route::post('update-experience-status', 'ExperienceController@updateExperienceStatus')->name('experience.updateExperienceStatus');
+
+        //education
+        Route::get('education', 'EducationController@index')->name('education.index');
+        Route::post('education', 'EducationController@store')->name('education.store');
+        Route::get('education/{education}', 'EducationController@show')->name('education.show');
+        Route::get('education/{education}/edit', 'EducationController@edit')->name('education.edit');
+        Route::post('education/{education}', 'EducationController@update')->name('education.update');
+        Route::get('education/{education}', 'EducationController@destroy')->name('education.destroy');
+        Route::post('update-education-status', 'EducationController@updateEducationStatus')->name('education.updateEducationStatus');
+
+        //portfolio
+        Route::get('portfolio', 'PortfolioController@index')->name('portfolio.index');
+        Route::post('portfolio', 'PortfolioController@store')->name('portfolio.store');
+        Route::get('portfolio/{portfolio}', 'PortfolioController@show')->name('portfolio.show');
+        Route::get('portfolio/{portfolio}/edit', 'PortfolioController@edit')->name('portfolio.edit');
+        Route::post('portfolio/{portfolio}', 'PortfolioController@update')->name('portfolio.update');
+        Route::get('portfolio/{portfolio}', 'PortfolioController@destroy')->name('portfolio.destroy');
+        Route::post('update-portfolio-status', 'PortfolioController@updatePortfolioStatus')->name('portfolio.updatePortfolioStatus');
+
+         //portfolio
+         Route::get('blog', 'BlogController@index')->name('blog.index');
+         Route::post('blog', 'BlogController@store')->name('blog.store');
+         Route::get('blog/{blog}', 'BlogController@show')->name('blog.show');
+         Route::get('blog/{blog}/edit', 'BlogController@edit')->name('blog.edit');
+         Route::post('blog/{blog}', 'BlogController@update')->name('blog.update');
+         Route::get('blog/{blog}', 'BlogController@destroy')->name('blog.destroy');
+         Route::post('update-blog-status', 'BlogController@updateBlogStatus')->name('portfolio.updateBlogStatus');
+
+    });
+    
+});

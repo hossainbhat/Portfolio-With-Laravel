@@ -7,8 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Portfolio extends Model
 {
-    use HasFactory;
+    use HasFactory,CommonTrait;
     protected $fillable = [
-        'title', 'description', 'link','image','status',
+        'image',
+        'title',
+        'client_name',
+        'langages',
+        'project_type',
+        'project_link',
+        'status',
     ];
 }
