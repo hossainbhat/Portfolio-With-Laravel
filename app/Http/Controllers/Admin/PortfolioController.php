@@ -80,7 +80,7 @@ class PortfolioController extends Controller
                     $extention = $image_temp->getClientOriginalExtension();
                     $imageName = rand(111,99999).'.'.$extention;
                     $imagePath = 'assets/uploads/portfolio/'.$imageName;
-                    Image::make($image_temp)->resize(300, 300)->save($imagePath);
+                    Image::make($image_temp)->resize(895, 552)->save($imagePath);
 
                }
             }
@@ -125,7 +125,7 @@ class PortfolioController extends Controller
                     $extention = $image_temp->getClientOriginalExtension();
                     $imageName = rand(111,99999).'.'.$extention;
                     $imagePath = 'assets/uploads/portfolio/'.$imageName;
-                    Image::make($image_temp)->resize(300, 300)->save($imagePath);
+                    Image::make($image_temp)->resize(895, 552)->save($imagePath);
 
                }
             }elseif($portfolio->id){
@@ -145,12 +145,19 @@ class PortfolioController extends Controller
     }
 
     public function destroy(Portfolio $portfolio){
-
+        if (is_null($portfolio)) {
+            return response()->json(["message" => "Recode Not Found !"], 404);
+        }
+        if (!empty($portfolio['image'])) {
+            if (file_exists($portfolio->image)) {
+                unlink($portfolio->image);
+            }
+        }
        $portfolio->delete();
        return redirect()->back();
     }
 
-    public function updateSkillStatus(Request $request){
+    public function updatePortfolioStatus(Request $request){
     	if ($request->ajax()) {
     		$data = $request->all();
     		// echo "<pre>"; print_r($data); die;

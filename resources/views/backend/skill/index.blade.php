@@ -153,6 +153,11 @@ $(function(){
               return returnData;
           }
       },
+      {'title':'Status','data': 'status', width:'15%', render: function (data, type, row, col){
+        let returnData = '';
+        return returnData += (data == 1 ? "<a class='updateSkillStatus' class='btn btn-success btn-sm' id='skill-"+row.id+"' skill_id='"+row.id+"' href='javascript:void(0)'><button type='button' class='btn btn-success btn-sm'>Active</button></a>" : "<a class='updateSkillStatus' id='skill-"+row.id+"' skill_id='"+row.id+"' href='javascript:void(0)'><button type='button' class='btn btn-warning btn-sm'>Inactive</button></a>");
+        }
+      },
       {
           'title': 'Action', data: 'id',class: 'text-right w72', width: '20px', render: function (data, type, row, col) {
               let returnData = '';
@@ -166,7 +171,7 @@ $(function(){
     columnDefs: [{
         searchable: false,
         orderable: false,
-        targets: [0, 2, 3]
+        targets: [0, 2, 3,4]
       }],
       responsive: true,
       autoWidth: false,
@@ -312,6 +317,25 @@ $(function(){
 
  });
 
+  $(document).on('click', '.updateSkillStatus', function () {
+      var status = $(this).text();
+      var skill_id = $(this).attr("skill_id");
+      $.ajax({
+        headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+        type:"post",
+        url:"/admin/update-skill-status",
+        data:{status:status,skill_id:skill_id},
+        success:function(resp){
+          if (resp['status']==0) {
+            $("#skill-"+skill_id).html("<a class='updateSkillStatus' class='btn btn-warning btn-sm' href='javascript:void(0)'><button type='button' class='btn btn-warning btn-sm'>Inactive</button></a>");
+          }else if(resp['status']==1){
+            $("#skill-"+skill_id).html("<a class='updateSkillStatus' class='btn btn-success btn-sm' href='javascript:void(0)'><button type='button' class='btn btn-success btn-sm'>Active</button></a>");
+          }
+        },error:function(){
+          console.log("Error");
+        }
+      });
+  });
 
 });
 </script>

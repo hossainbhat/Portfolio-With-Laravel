@@ -8,8 +8,10 @@ Route::namespace('App\Http\Controllers')->group(function(){
     Route::get('/about','IndexController@about')->name('about');
     Route::get('/portfolio','IndexController@portfolio')->name('portfolio');
     Route::get('/contact','IndexController@contact')->name('contact');
+    Route::post('/contact/store','IndexController@store')->name('contact.store');
     Route::get('/blog','IndexController@blog')->name('blog');
-    Route::get('/blog-details','IndexController@blogdetails')->name('blogdetails');
+    Route::get('/blog-details/{blog}','IndexController@blogdetails')->name('blogdetails');
+   
 });
 
 
@@ -22,7 +24,9 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
     Route::group(['middleware' => ['auth']],function(){
         Route::get('/dashboard','AdminController@dashboard')->name('admin.dashboard');
         Route::get('/logout', 'AdminController@logout')->name('admin.logout');
-
+        Route::post('update-password','AdminController@updatePassword')->name('admin.updatePassword');
+        Route::match(['get','post'],'/profile', 'AdminController@profile')->name('admin.profile');
+        
         //skill
         Route::get('skill', 'SkillController@index')->name('skill.index');
         Route::post('skill', 'SkillController@store')->name('skill.store');
@@ -59,14 +63,31 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::get('portfolio/{portfolio}', 'PortfolioController@destroy')->name('portfolio.destroy');
         Route::post('update-portfolio-status', 'PortfolioController@updatePortfolioStatus')->name('portfolio.updatePortfolioStatus');
 
-         //portfolio
-         Route::get('blog', 'BlogController@index')->name('blog.index');
-         Route::post('blog', 'BlogController@store')->name('blog.store');
-         Route::get('blog/{blog}', 'BlogController@show')->name('blog.show');
-         Route::get('blog/{blog}/edit', 'BlogController@edit')->name('blog.edit');
-         Route::post('blog/{blog}', 'BlogController@update')->name('blog.update');
-         Route::get('blog/{blog}', 'BlogController@destroy')->name('blog.destroy');
-         Route::post('update-blog-status', 'BlogController@updateBlogStatus')->name('portfolio.updateBlogStatus');
+        //portfolio
+        Route::get('blog', 'BlogController@index')->name('blog.index');
+        Route::post('blog', 'BlogController@store')->name('blog.store');
+        Route::get('blog/{blog}', 'BlogController@show')->name('blog.show');
+        Route::get('blog/{blog}/edit', 'BlogController@edit')->name('blog.edit');
+        Route::post('blog/{blog}', 'BlogController@update')->name('blog.update');
+        Route::get('blog/{blog}', 'BlogController@destroy')->name('blog.destroy');
+        Route::post('update-blog-status', 'BlogController@updateBlogStatus')->name('portfolio.updateBlogStatus');
+
+        //contact
+        Route::get('contact', 'ContactController@index')->name('contact.index');
+        Route::get('contact/{id}', 'ContactController@show')->name('contact.show');
+        Route::match(['get','post'],'contact/{id}/replay', 'ContactController@replay')->name('contact.replay');
+        Route::get('contact/{contact}', 'ContactController@destroy')->name('contact.destroy');
+
+        //portfolio
+        Route::get('blog', 'BlogController@index')->name('blog.index');
+        Route::post('blog', 'BlogController@store')->name('blog.store');
+        Route::get('blog/{blog}', 'BlogController@show')->name('blog.show');
+        Route::get('blog/{blog}/edit', 'BlogController@edit')->name('blog.edit');
+        Route::post('blog/{blog}', 'BlogController@update')->name('blog.update');
+        Route::get('blog/{blog}', 'BlogController@destroy')->name('blog.destroy');
+
+        //site setting
+        Route::match(['get','post'],'/site-setting','SiteSettingController@siteSetting')->name('sitesetting');
 
     });
     

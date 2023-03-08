@@ -15,7 +15,11 @@
       <!-- User Menu Start -->
       <div class="user-container d-flex">
         <a href="#" class="d-flex user position-relative" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          @if(auth()->user()->image)
+          <img src="{{asset(auth()->user()->image)}}" class="me-3 sw-4 sh-4 rounded-xl align-self-center" alt="..." />
+          @else 
           <img class="profile" alt="profile" src="{{asset('assets/backend/img/profile/profile-1.webp')}}" />
+          @endif 
           <div class="name">{{ucwords(auth()->user()->name)}}</div>
         </a>
         <div class="dropdown-menu dropdown-menu-end user-menu wide d-none">
@@ -50,6 +54,7 @@
 
                 <li class="mb-3 pb-3 border-bottom border-separator-light d-flex">
                   <img src="{{asset('assets/backend/img/profile/profile-1.webp')}}" class="me-3 sw-4 sh-4 rounded-xl align-self-center" alt="..." />
+             
                   <div class="align-self-center">
                     <a href="#">Joisse Kaycee just sent a new comment!</a>
                   </div>
@@ -66,13 +71,13 @@
       <div class="menu-container flex-grow-1">
         <ul id="menu" class="menu">
           <li>
-            <a href="{{route('admin.dashboard')}}">
+            <a href="{{route('admin.dashboard')}}" class="{{ (url()->current()== route('admin.dashboard')) ? 'active' : '' }}">
               <i class="fa-solid fa-gauge"></i>
               <span class="label">Dashboard</span>
             </a>
           </li>
           <li>
-            <a href="{{route('admin.dashboard')}}">
+            <a href="{{route('admin.profile')}}" class="{{ (url()->current()== route('admin.profile')) ? 'active' : '' }}">
               <i class="fa-solid fa-user"></i>
               <span class="label">Profile</span>
             </a>
@@ -102,7 +107,7 @@
             </a>
           </li>
           <li>
-            <a href="{{route('admin.dashboard')}}">
+            <a href="{{route('contact.index')}}" class="{{ (url()->current()== route('contact.index')) ? 'active' : '' }}">
               <i class="fa-solid fa-envelope"></i>
               <span class="label">Mails</span>
             </a>
@@ -113,7 +118,12 @@
               <span class="label">Blogs</span>
             </a>
           </li>
-          
+          <li>
+            <a href="{{route('sitesetting')}}" class="{{ (url()->current()== route('sitesetting')) ? 'active' : '' }}">
+              <i class="fa-solid fa-cogs"></i>
+              <span class="label">Setting</span>
+            </a>
+          </li>
           <li>
             <a href="{{route('admin.logout')}}">
               <i class="fa-solid fa-power-off"></i>

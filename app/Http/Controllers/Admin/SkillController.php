@@ -119,6 +119,7 @@ class SkillController extends Controller
     			$status = 1;
     		}
     		Skill::where('id',$data['skill_id'])->update(['status'=>$status]);
+            
     		return response()->json(['status'=>$status,'skill_id'=>$data['skill_id']]);
     	}
     }

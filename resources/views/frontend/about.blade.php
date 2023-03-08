@@ -35,24 +35,22 @@
                         </div>
                         <div class="col-6">
                             <ul class="about-list list-unstyled open-sans-font">
-                                <li> <span class="title">first name :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">Steve</span> </li>
-                                <li> <span class="title">last name :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">Milner</span> </li>
-                                <li> <span class="title">Age :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">27 Years</span> </li>
-                                <li> <span class="title">Nationality :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">Tunisian</span> </li>
-                                <li> <span class="title">Freelance :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">Available</span> </li>
+                                <li> <span class="title">Full Name :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">Md. {{$user->name}}</span> </li>
+                                <li> <span class="title">Email :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">{{$user->email}}</span> </li>
+                                <li> <span class="title">Age :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">{{$user->age}} Years</span> </li>
+                                <li> <span class="title">Address :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">{{$user->address}}</span> </li>
                             </ul>
                         </div>
                         <div class="col-6">
                             <ul class="about-list list-unstyled open-sans-font">
-                                <li> <span class="title">Address :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">Tunis</span> </li>
-                                <li> <span class="title">phone :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">+21621184010</span> </li>
-                                <li> <span class="title">Email :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">you@mail.com</span> </li>
-                                <li> <span class="title">Skype :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">steve.milner</span> </li>
-                                <li> <span class="title">langages :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">French, English</span> </li>
+                                <li> <span class="title">phone :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">+88{{$user->mobile}}</span> </li>
+                                <li> <span class="title">Skype :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">{{$user->skype}}</span> </li>
+                                <li> <span class="title">Freelance :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">{{$user->freelance}}</span> </li>
+                                <li> <span class="title">Nationality :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">{{$user->nationality}}</span> </li>
                             </ul>
                         </div>
                         <div class="col-12 mt-3">
-                            <a class="button" href="#">
+                            <a class="button" href="{{$user->upload_cv}}" target="_blanck">
                                 <span class="button-text">Download CV</span>
                                 <span class="button-icon fa fa-download"></span>
                             </a>
@@ -65,25 +63,25 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="box-stats with-margin">
-                                <h3 class="poppins-font position-relative">12</h3>
+                                <h3 class="poppins-font position-relative">{{$setting->experience_year}}</h3>
                                 <p class="open-sans-font m-0 position-relative text-uppercase">years of <span class="d-block">experience</span></p>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="box-stats with-margin">
-                                <h3 class="poppins-font position-relative">97</h3>
+                                <h3 class="poppins-font position-relative">{{$setting->total_project}}</h3>
                                 <p class="open-sans-font m-0 position-relative text-uppercase">completed <span class="d-block">projects</span></p>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="box-stats">
-                                <h3 class="poppins-font position-relative">81</h3>
+                                <h3 class="poppins-font position-relative">{{$setting->happy_customer}}</h3>
                                 <p class="open-sans-font m-0 position-relative text-uppercase">Happy<span class="d-block">customers</span></p>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="box-stats">
-                                <h3 class="poppins-font position-relative">53</h3>
+                                <h3 class="poppins-font position-relative">{{$setting->awards}}</h3>
                                 <p class="open-sans-font m-0 position-relative text-uppercase">awards <span class="d-block">won</span></p>
                             </div>
                         </div>
@@ -97,17 +95,20 @@
                 <div class="col-12">
                     <h3 class="text-uppercase pb-4 pb-sm-5 mb-3 mb-sm-0 text-left text-sm-center custom-title ft-wt-600">My Skills</h3>
                 </div>
+                @if($skills->count() >0)
+                @foreach ($skills as $skill)
                 <div class="col-6 col-md-3 mb-3 mb-sm-5">
-                    <div class="c100 p25">
-                        <span>25%</span>
+                    <div class="c100 p{{$skill->percentage}}">
+                        <span>{{$skill->percentage}}%</span>
                         <div class="slice">
                             <div class="bar"></div>
                             <div class="fill"></div>
                         </div>
                     </div>
-                    <h6 class="text-uppercase open-sans-font text-center mt-2 mt-sm-4">html</h6>
+                    <h6 class="text-uppercase open-sans-font text-center mt-2 mt-sm-4">{{$skill->title}}</h6>
                 </div>
-                
+                @endforeach
+                @endif
                 
             </div>
             <!-- Skills Ends -->
@@ -120,30 +121,36 @@
                 <div class="col-lg-6 m-15px-tb">
                     <div class="resume-box">
                         <ul>
+                            @if($experiences->count() >0)
+                            @foreach ($experiences as $item)
                             <li>
                                 <div class="icon">
                                     <i class="fa fa-briefcase"></i>
                                 </div>
-                                <span class="time open-sans-font text-uppercase">2018 - Present</span>
-                                <h5 class="poppins-font text-uppercase">Web Developer <span class="place open-sans-font">Envato</span></h5>
-                                <p class="open-sans-font">Lorem ipsum dolor sit amet, consectetur tempor incididunt ut labore adipisicing elit, </p>
+                                <span class="time open-sans-font text-uppercase">{{$item->passing_year}}</span>
+                                <h5 class="poppins-font text-uppercase">{{$item->designation}} <span class="place open-sans-font">{{$item->company_name}}</span></h5>
+                                <p class="open-sans-font">{{$item->description}} </p>
                             </li>
-                            
+                            @endforeach
+                            @endif
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-6 m-15px-tb">
                     <div class="resume-box">
                         <ul>
-                            <li>
-                                <div class="icon">
-                                    <i class="fa fa-graduation-cap"></i>
-                                </div>
-                                <span class="time open-sans-font text-uppercase">2015</span>
-                                <h5 class="poppins-font text-uppercase">Engineering Degree <span class="place open-sans-font">Oxford University</span></h5>
-                                <p class="open-sans-font">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do tempor incididunt ut labore</p>
-                            </li>
-                            
+                            @if($education->count() >0)
+                                @foreach ($education as $item)
+                                <li>
+                                    <div class="icon">
+                                        <i class="fa fa-graduation-cap"></i>
+                                    </div>
+                                    <span class="time open-sans-font text-uppercase">{{$item->passing_year}}</span>
+                                    <h5 class="poppins-font text-uppercase">{{$item->degree_name}} <span class="place open-sans-font">{{$item->school_name}}</span></h5>
+                                    <p class="open-sans-font">{{$item->description}}</p>
+                                </li>
+                                @endforeach
+                            @endif 
                         </ul>
                     </div>
                 </div>

@@ -77,7 +77,7 @@ class BlogController extends Controller
                     $extention = $image_temp->getClientOriginalExtension();
                     $imageName = rand(111,99999).'.'.$extention;
                     $imagePath = 'assets/uploads/blog/'.$imageName;
-                    Image::make($image_temp)->resize(300, 300)->save($imagePath);
+                    Image::make($image_temp)->resize(895, 552)->save($imagePath);
 
                }
             }
@@ -119,7 +119,7 @@ class BlogController extends Controller
                     $extention = $image_temp->getClientOriginalExtension();
                     $imageName = rand(111,99999).'.'.$extention;
                     $imagePath = 'assets/uploads/portfolio/'.$imageName;
-                    Image::make($image_temp)->resize(300, 300)->save($imagePath);
+                    Image::make($image_temp)->resize(895, 552)->save($imagePath);
 
                }
             }elseif($blog->id){
@@ -138,6 +138,15 @@ class BlogController extends Controller
     }
 
     public function destroy(Blog $blog){
+
+        if (is_null($blog)) {
+            return response()->json(["message" => "Recode Not Found !"], 404);
+        }
+        if (!empty($blog['image'])) {
+            if (file_exists($blog->image)) {
+                unlink($blog->image);
+            }
+        }
 
        $blog->delete();
        return redirect()->back();

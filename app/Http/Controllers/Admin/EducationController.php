@@ -119,7 +119,7 @@ class EducationController extends Controller
        return redirect()->back();
     }
 
-    public function updateSkillStatus(Request $request){
+    public function updateEducationStatus(Request $request){
     	if ($request->ajax()) {
     		$data = $request->all();
     		// echo "<pre>"; print_r($data); die;

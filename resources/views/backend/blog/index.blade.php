@@ -170,6 +170,11 @@ $(function(){
         return returnData += "<img src='/"+data+"' width='60' height='60'>";
           }
       },
+      {'title':'Status','data': 'status', width:'15%', render: function (data, type, row, col){
+        let returnData = '';
+       return returnData += (data == 1 ? "<a class='updateBlogStatus' class='btn btn-success btn-sm' id='blog-"+row.id+"' blog_id='"+row.id+"' href='javascript:void(0)'><button type='button' class='btn btn-success btn-sm'>Active</button></a>" : "<a class='updateBlogStatus' id='blog-"+row.id+"' blog_id='"+row.id+"' href='javascript:void(0)'><button type='button' class='btn btn-warning btn-sm'>Inactive</button></a>");
+        }
+      },
       {
           'title': 'Action', data: 'id',class: 'text-right w72', width: '20px', render: function (data, type, row, col) {
               let returnData = '';
@@ -183,7 +188,7 @@ $(function(){
     columnDefs: [{
         searchable: false,
         orderable: false,
-        targets: [0,2,3]
+        targets: [0,2,3,4]
       }],
       responsive: true,
       autoWidth: false,
@@ -339,6 +344,26 @@ $(function(){
     })
 
  });
+ $('body').on('click', '.updateBlogStatus', function () {
+      var status = $(this).text();
+      var blog_id = $(this).attr("blog_id");
+      // console.log(blog_id);
+      $.ajax({
+          headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+          type:"post",
+          url:"/admin/update-blog-status",
+          data:{status:status,blog_id:blog_id},
+          success:function(resp){
+              if (resp['status']==0) {
+                  $("#blog-"+blog_id).html("<a class='updateBlogStatus' class='btn btn-warning btn-sm' href='javascript:void(0)'><button type='button' class='btn btn-warning btn-sm'>Inactive</button></a>");
+              }else if(resp['status']==1){
+                  $("#blog-"+blog_id).html("<a class='updateBlogStatus' class='btn btn-success btn-sm' href='javascript:void(0)'><button type='button' class='btn btn-success btn-sm'>Active</button></a>");
+              }
+          },error:function(){
+              console.log("Error");
+          }
+      });
+  });
 
 
 });

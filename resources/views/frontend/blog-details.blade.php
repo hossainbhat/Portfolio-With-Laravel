@@ -28,26 +28,21 @@
                     <article class="col-12">
                         <!-- Meta Starts -->
                         <div class="meta open-sans-font">
-                            <span><i class="fa fa-user"></i> steve</span>
-                            <span class="date"><i class="fa fa-calendar"></i> 9 January 2017</span>
-                            <span><i class="fa fa-tags"></i> wordpress, business, economy, design</span>
+                            <span class="date"><i class="fa fa-calendar"></i> {{ $blog->created_at->format('d/m/Y')}}</span>
+                            <span><i class="fa fa-tags"></i> {{$blog->tags}}</span>
                         </div>
                         <!-- Meta Ends -->
                         <!-- Article Content Starts -->
-                        <h1 class="text-uppercase text-capitalize">Everything You Need to Know About Web Accessibility</h1>
+                        <h1 class="text-uppercase text-capitalize">{{$blog->title}}</h1>
+                        @if($blog->image)
+                        <img src="{{asset($blog->image)}}" class="img-fluid" alt="Blog image"/>
+                        @else 
                         <img src="{{asset('assets/frontend/img/blog/blog-post-1.jpg')}}" class="img-fluid" alt="Blog image"/>
+                        @endif 
                         <div class="blog-excerpt open-sans-font pb-5">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum
-                                dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-                                aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum
-                                dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-                                aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <p>{{$blog->content}}</p>
                         </div>
+                        <div id="disqus_thread"></div>
                         <!-- Article Content Ends -->
                     </article>
                     <!-- Article Ends -->
@@ -60,4 +55,15 @@
     
     </body>
 
+@endsection
+@section('js')
+<script>
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://portfolio-6ac2qgwmqs.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 @endsection

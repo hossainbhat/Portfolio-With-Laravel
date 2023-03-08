@@ -166,6 +166,11 @@ $(function(){
       {'title':'Designation','name':'designation','data':'designation'},
       {'title':'Company','name':'company_name','data':'company_name'},
       {'title':'Passing Year','name':'passing_year','data':'passing_year'},
+      {'title':'Status','data': 'status', width:'15%', render: function (data, type, row, col){
+        let returnData = '';
+       return returnData += (data == 1 ? "<a class='updateExperienceStatus' class='btn btn-success btn-sm' id='experience-"+row.id+"' experience_id='"+row.id+"' href='javascript:void(0)'><button type='button' class='btn btn-success btn-sm'>Active</button></a>" : "<a class='updateExperienceStatus' id='experience-"+row.id+"' experience_id='"+row.id+"' href='javascript:void(0)'><button type='button' class='btn btn-warning btn-sm'>Inactive</button></a>");
+        }
+      },
       {
           'title': 'Action', data: 'id',class: 'text-right w72', width: '20px', render: function (data, type, row, col) {
               let returnData = '';
@@ -179,7 +184,7 @@ $(function(){
     columnDefs: [{
         searchable: false,
         orderable: false,
-        targets: [0, 4]
+        targets: [0, 4,5]
       }],
       responsive: true,
       autoWidth: false,
@@ -327,6 +332,25 @@ $(function(){
 
  });
 
+ $('body').on('click', '.updateExperienceStatus', function () {
+      var status = $(this).text();
+      var experience_id = $(this).attr("experience_id");
+      $.ajax({
+          headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+          type:"post",
+          url:"/admin/update-experience-status",
+          data:{status:status,experience_id:experience_id},
+          success:function(resp){
+              if (resp['status']==0) {
+                  $("#experience-"+experience_id).html("<a class='updateExperienceStatus' class='btn btn-warning btn-sm' href='javascript:void(0)'><button type='button' class='btn btn-warning btn-sm'>Inactive</button></a>");
+              }else if(resp['status']==1){
+                  $("#experience-"+experience_id).html("<a class='updateExperienceStatus' class='btn btn-success btn-sm' href='javascript:void(0)'><button type='button' class='btn btn-success btn-sm'>Active</button></a>");
+              }
+          },error:function(){
+              console.log("Error");
+          }
+      });
+  });
 
 });
 </script>

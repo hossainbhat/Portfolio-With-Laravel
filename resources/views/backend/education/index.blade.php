@@ -166,6 +166,11 @@ $(function(){
       {'title':'Degree Name','name':'degree_name','data':'degree_name'},
       {'title':'School / University','name':'school_name','data':'school_name'},
       {'title':'Passing Year','name':'passing_year','data':'passing_year'},
+      {'title':'Status','data': 'status', width:'15%', render: function (data, type, row, col){
+        let returnData = '';
+       return returnData += (data == 1 ? "<a class='updateEducationStatus' class='btn btn-success btn-sm' id='education-"+row.id+"' education_id='"+row.id+"' href='javascript:void(0)'><button type='button' class='btn btn-success btn-sm'>Active</button></a>" : "<a class='updateEducationStatus' id='education-"+row.id+"' education_id='"+row.id+"' href='javascript:void(0)'><button type='button' class='btn btn-warning btn-sm'>Inactive</button></a>");
+        }
+      },
       {
           'title': 'Action', data: 'id',class: 'text-right w72', width: '20px', render: function (data, type, row, col) {
               let returnData = '';
@@ -179,7 +184,7 @@ $(function(){
     columnDefs: [{
         searchable: false,
         orderable: false,
-        targets: [0, 4]
+        targets: [0, 4,5]
       }],
       responsive: true,
       autoWidth: false,
@@ -326,6 +331,27 @@ $(function(){
     })
 
  });
+
+
+ $('body').on('click', '.updateEducationStatus', function () {
+      var status = $(this).text();
+      var education_id = $(this).attr("education_id");
+      $.ajax({
+          headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+          type:"post",
+          url:"/admin/update-education-status",
+          data:{status:status,education_id:education_id},
+          success:function(resp){
+              if (resp['status']==0) {
+                  $("#education-"+education_id).html("<a class='updateEducationStatus' class='btn btn-warning btn-sm' href='javascript:void(0)'><button type='button' class='btn btn-warning btn-sm'>Inactive</button></a>");
+              }else if(resp['status']==1){
+                  $("#education-"+education_id).html("<a class='updateEducationStatus' class='btn btn-success btn-sm' href='javascript:void(0)'><button type='button' class='btn btn-success btn-sm'>Active</button></a>");
+              }
+          },error:function(){
+              console.log("Error");
+          }
+      });
+  });
 
 
 });

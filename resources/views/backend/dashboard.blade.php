@@ -50,7 +50,7 @@
                       <i class="fa-solid fa-user-gear text-primary"></i>
                     </div>
                     <div class="mb-1 d-flex align-items-center text-alternate text-small lh-1-25">Total Skill</div>
-                    <div class="text-primary cta-4">10</div>
+                    <div class="text-primary cta-4">{{$skill}}</div>
                   </div>
                 </div>
               </div>
@@ -61,7 +61,7 @@
                       <i class="fa-solid fa-diagram-project text-primary"></i>
                     </div>
                     <div class="mb-1 d-flex align-items-center text-alternate text-small lh-1-25">Total Project</div>
-                    <div class="text-primary cta-4">16</div>
+                    <div class="text-primary cta-4">{{$portfolio}}</div>
                   </div>
                 </div>
               </div>
@@ -72,7 +72,7 @@
                       <i class="fa-solid fa-envelope text-primary"></i>
                     </div>
                     <div class="mb-1 d-flex align-items-center text-alternate text-small lh-1-25">Total Mail</div>
-                    <div class="text-primary cta-4">17</div>
+                    <div class="text-primary cta-4">{{$contact}}</div>
                   </div>
                 </div>
               </div>
@@ -83,7 +83,7 @@
                       <i class="fa-solid fa-blog text-primary"></i>
                     </div>
                     <div class="mb-1 d-flex align-items-center text-alternate text-small lh-1-25">Total Blog</div>
-                    <div class="text-primary cta-4">5</div>
+                    <div class="text-primary cta-4">{{$blog}}</div>
                   </div>
                 </div>
               </div>
@@ -94,57 +94,12 @@
       </div>
       <!-- Stats End -->
 
-      <div class="row">
-        <!-- Recent Orders Start -->
-        <div class="col-xl-6 mb-5">
-          <h2 class="small-title">Recent Mails</h2>
-          <div class="mb-n2 scroll-out">
-            <div class="scroll-by-count" data-count="6">
-
-              <div class="card mb-2 sh-15 sh-md-6">
-                <div class="card-body pt-0 pb-0 h-100">
-                  <div class="row g-0 h-100 align-content-center">
-                    <div class="col-10 col-md-4 d-flex align-items-center mb-3 mb-md-0 h-md-100">
-                      <a href="#" class="body-link stretched-link">In publishing and graphic</a>
-                    </div>
-                    <div class="col-2 col-md-3 d-flex align-items-center text-muted mb-1 mb-md-0 justify-content-end">
-                      12 May 2023
-                    </div>
-                   
-                    <div class="col-12 col-md-3 d-flex align-items-center justify-content-md-end mb-1 mb-md-0 text-alternate">
-                      <span class="badge bg-outline-success"><i class="fa-solid fa-eye"></i></span>&nbsp;&nbsp;
-                      <span class="badge bg-outline-primary"><i class="fa-solid fa-envelope"></i></span>&nbsp;&nbsp;
-                      <span class="badge bg-outline-danger"><i class="fa-solid fa-trash"></i></span>
-                    </div>
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Recent Orders End -->
-        <!-- Recent Orders Start -->
-        <div class="col-xl-6 mb-5">
-          <h2 class="small-title">Recent Mails</h2>
-          <div class="mb-n2 scroll-out">
-            <div class="scroll-by-count" data-count="6">
-
-              <div class="card mb-2 sh-15 sh-md-6">
-                <div class="card-body pt-0 pb-0 h-100">
-                  <div class="row g-0 h-100 align-content-center">
-                  
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Recent Orders End -->
-       
-      </div>
+  
 
     </div>
   </main>
+
+  @endsection
+  @section('js')
+
   @endsection

@@ -16,4 +16,6 @@ class Blog extends Model
         'tags',
         'status',
     ];
+
+   
 }

@@ -190,6 +190,11 @@ $(function(){
         return returnData += "<img src='/"+data+"' width='60' height='60'>";
           }
       },
+      {'title':'Status','data': 'status', width:'15%', render: function (data, type, row, col){
+          let returnData = '';
+        return returnData += (data == 1 ? "<a class='updatePortfolioStatus' class='btn btn-success btn-sm' id='portfolio-"+row.id+"' portfolio_id='"+row.id+"' href='javascript:void(0)'><button type='button' class='btn btn-success btn-sm'>Active</button></a>" : "<a class='updatePortfolioStatus' id='portfolio-"+row.id+"' portfolio_id='"+row.id+"' href='javascript:void(0)'><button type='button' class='btn btn-warning btn-sm'>Inactive</button></a>");
+          }
+        },
       {
           'title': 'Action', data: 'id',class: 'text-right w72', width: '20px', render: function (data, type, row, col) {
               let returnData = '';
@@ -203,7 +208,7 @@ $(function(){
     columnDefs: [{
         searchable: false,
         orderable: false,
-        targets: [0, 3,4]
+        targets: [0, 3,4,5]
       }],
       responsive: true,
       autoWidth: false,
@@ -361,6 +366,26 @@ $(function(){
     })
 
  });
+
+ $('body').on('click', '.updatePortfolioStatus', function () {
+      var status = $(this).text();
+      var portfolio_id = $(this).attr("portfolio_id");
+      $.ajax({
+          headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+          type:"post",
+          url:"/admin/update-portfolio-status",
+          data:{status:status,portfolio_id:portfolio_id},
+          success:function(resp){
+              if (resp['status']==0) {
+                  $("#portfolio-"+portfolio_id).html("<a class='updatePortfolioStatus' class='btn btn-warning btn-sm' href='javascript:void(0)'><button type='button' class='btn btn-warning btn-sm'>Inactive</button></a>");
+              }else if(resp['status']==1){
+                  $("#portfolio-"+portfolio_id).html("<a class='updatePortfolioStatus' class='btn btn-success btn-sm' href='javascript:void(0)'><button type='button' class='btn btn-success btn-sm'>Active</button></a>");
+              }
+          },error:function(){
+              console.log("Error");
+          }
+      });
+  });
 
 
 });

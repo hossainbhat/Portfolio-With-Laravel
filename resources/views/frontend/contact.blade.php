@@ -28,44 +28,48 @@
                     <!-- Left Side Starts -->
                     <div class="col-12 col-lg-4">
                         <h3 class="text-uppercase custom-title mb-0 ft-wt-600 pb-3">Don't be shy !</h3>
-                        <p class="open-sans-font mb-3">Feel free to get in touch with me. I am always open to discussing new projects, creative ideas or opportunities to be part of your visions.</p>
+                        <p class="open-sans-font mb-3">{{$setting->description}}</p>
                         <p class="open-sans-font custom-span-contact position-relative">
                             <i class="fa fa-envelope-open position-absolute"></i>
-                            <span class="d-block">mail me</span>steve@mail.com
+                            <span class="d-block">mail me</span>{{$setting->email}}
                         </p>
                         <p class="open-sans-font custom-span-contact position-relative">
                             <i class="fa fa-phone-square position-absolute"></i>
-                            <span class="d-block">call me</span>+216 21 184 010
+                            <span class="d-block">call me</span>+88 {{$setting->mobile}}
                         </p>
                         <ul class="social list-unstyled pt-1 mb-5">
-                            <li class="facebook"><a title="Facebook" href="#"><i class="fa fa-facebook"></i></a>
+                            <li class="facebook"><a target="_blanck" title="Facebook" href="{{$setting->facebook}}"><i class="fa fa-facebook"></i></a>
                             </li>
-                            <li class="twitter"><a title="Twitter" href="#"><i class="fa fa-twitter"></i></a>
+                            <li class="twitter"><a target="_blanck" title="Twitter" href="{{$setting->twitter}}"><i class="fa fa-twitter"></i></a>
                             </li>
-                            <li class="youtube"><a title="Youtube" href="#"><i class="fa fa-youtube"></i></a>
+                            <li class="youtube"><a target="_blanck" title="Youtube" href="{{$setting->youtube}}"><i class="fa fa-youtube"></i></a>
                             </li>
-                            <li class="dribbble"><a title="Dribbble" href="#"><i class="fa fa-dribbble"></i></a>
+                            <li class="dribbble"><a target="_blanck" title="Github" href="{{$setting->github}}"><i class="fa fa-github"></i></a>
                             </li>
                         </ul>
                     </div>
                     <!-- Left Side Ends -->
                     <!-- Contact Form Starts -->
                     <div class="col-12 col-lg-8">
-                        <form class="contactform" method="post" action="https://slimhamdi.net/tunis/dark/php/process-form.php">
+                        <form class="contactform" id="EmailContactform">
                             <div class="contactform">
                                 <div class="row">
                                     <div class="col-12 col-md-4">
-                                        <input type="text" name="name" placeholder="YOUR NAME">
+                                        <input type="text" name="name" id="name" placeholder="YOUR NAME">
+                                        <p class="text-danger" id="nameError"></p>
                                     </div>
                                     <div class="col-12 col-md-4">
-                                        <input type="email" name="email" placeholder="YOUR EMAIL">
+                                        <input type="email" name="email" id="email" placeholder="YOUR EMAIL">
+                                        <p class="text-danger" id="emailError"></p>
                                     </div>
                                     <div class="col-12 col-md-4">
-                                        <input type="text" name="subject" placeholder="YOUR SUBJECT">
+                                        <input type="text" name="subject" id="subject" placeholder="YOUR SUBJECT">
+                                        <p class="text-danger" id="subjectError"></p>
                                     </div>
                                     <div class="col-12">
-                                        <textarea name="message" placeholder="YOUR MESSAGE"></textarea>
-                                        <button type="submit" class="button">
+                                        <textarea name="content" id="content" placeholder="YOUR MESSAGE"></textarea>
+                                        <p class="text-danger" id="contentError"></p>
+                                        <button type="submit" id="saveContactBtn" class="button">
                                             <span class="button-text">Send Message</span>
                                             <span class="button-icon fa fa-send"></span>
                                         </button>
@@ -88,4 +92,41 @@
     
     </body>
 
+@endsection
+@section('js')
+<script>
+      $('#saveContactBtn').on('click',function(e) {
+      e.preventDefault();
+
+        $("#nameError").text('');
+        $("#emailError").text('');
+        $("#subjectError").text('');
+        $("#contentError").text('');
+
+      var formData = new FormData($("#EmailContactform")[0]);
+    //   console.log(formData);
+      $.ajax({
+        headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+        type:'POST',
+        url: "{{route('contact.store')}}",
+        data: formData,
+        cache:false,
+        contentType: false,
+        processData: false,
+        success: (data) => {
+        //  console.log(data);
+        alert("Your Query Send Successfully");
+        $('#EmailContactform').trigger("reset");
+        },
+        error: function(data){
+        //   console.log(data);
+          $("#nameError").text(data.responseJSON.errors.name);
+          $("#emailError").text(data.responseJSON.errors.email);
+          $("#subjectError").text(data.responseJSON.errors.subject);
+          $("#contentError").text(data.responseJSON.errors.content);
+        }
+      });
+     
+  });
+</script>
 @endsection
