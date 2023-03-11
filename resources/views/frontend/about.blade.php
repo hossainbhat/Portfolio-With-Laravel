@@ -63,25 +63,25 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="box-stats with-margin">
-                                <h3 class="poppins-font position-relative">{{$setting->experience_year}}</h3>
+                                <h3 class="poppins-font position-relative">{{@$setting->experience_year}}</h3>
                                 <p class="open-sans-font m-0 position-relative text-uppercase">years of <span class="d-block">experience</span></p>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="box-stats with-margin">
-                                <h3 class="poppins-font position-relative">{{$setting->total_project}}</h3>
+                                <h3 class="poppins-font position-relative">{{@$setting->total_project}}</h3>
                                 <p class="open-sans-font m-0 position-relative text-uppercase">completed <span class="d-block">projects</span></p>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="box-stats">
-                                <h3 class="poppins-font position-relative">{{$setting->happy_customer}}</h3>
+                                <h3 class="poppins-font position-relative">{{@$setting->happy_customer}}</h3>
                                 <p class="open-sans-font m-0 position-relative text-uppercase">Happy<span class="d-block">customers</span></p>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="box-stats">
-                                <h3 class="poppins-font position-relative">{{$setting->awards}}</h3>
+                                <h3 class="poppins-font position-relative">{{@$setting->awards}}</h3>
                                 <p class="open-sans-font m-0 position-relative text-uppercase">awards <span class="d-block">won</span></p>
                             </div>
                         </div>

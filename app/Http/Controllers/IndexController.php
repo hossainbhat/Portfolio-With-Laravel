@@ -11,6 +11,7 @@ use App\Models\Skill;
 use App\Models\User;
 use App\Models\Portfolio;
 use App\Models\SiteSetting;
+use Illuminate\Support\Facades\Mail;
 
 class IndexController extends Controller
 {
@@ -76,6 +77,18 @@ class IndexController extends Controller
             $contact->subject = $request->subject;
             $contact->content = $request->content;
             $contact->save();
+
+            // Send Contact Email
+            $email = "hossainbhatcse@gmail.com";
+            $messageData = [
+                'name'      =>$request['name'],
+                'subject'   =>$request['subject'],
+                'email'     =>$request['email'],
+                'comment'   =>$request['content']
+            ];
+            Mail::send('Mail.enquiry',$messageData,function($message)use($email){
+                $message->to($email)->subject('Enquiry from Md Hossain Bhat Portfolio');
+            });
         }
         return redirect()->back();
     }

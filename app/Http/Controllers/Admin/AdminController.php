@@ -10,7 +10,12 @@ use App\Models\Portfolio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Contracts\Session\Session;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Image;
 
 class AdminController extends Controller
@@ -32,8 +37,40 @@ class AdminController extends Controller
     	}
         return view('backend.auth.login');
     }
-    public function forgotpassword(){
-        
+    public function forgotpassword(Request $request){
+       
+        if($request->isMethod('post')){
+            //  dd($request->all());
+            $data = $request->input();
+            $emailCount = User::where('email',$data['email'])->count();
+            if($emailCount ==0){
+                toastr()->error('Email does not exist');
+            }
+            $token = Str::random(8);
+            $new_password = bcrypt($token);
+            User::where('email',$data['email'])->update(['password'=>$new_password]);
+            $userName= User ::select('name')->where('email',$data['email'])->first();
+
+            DB::table('password_reset_tokens')->insert([
+                'email' => $request->email, 
+                'token' => $token, 
+                'created_at' => Carbon::now()
+              ]);
+
+            $email  = $data['email'];
+            $name   = $userName->name;
+            $messageData =[
+                'email'     =>$email,
+                'name'      =>$name,
+                'password'  => $token
+            ];
+            Mail::send('Mail.forgot_password',$messageData,function($message) use ($email){
+                $message ->to($email)->subject('Your Recovery Password');
+            });
+            toastr()->success('please check your email for new password');
+            return redirect()->route('admin.login');
+            
+        }
         return view('backend.auth.forgotpassword');
     }
 

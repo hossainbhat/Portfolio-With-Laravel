@@ -56,12 +56,13 @@
                 </p>
               </div>
               <div>
-                <form id="loginForm" class="tooltip-end-bottom" novalidate>
+                <form id="loginForm" class="tooltip-end-bottom" action="{{route('admin.forgotpassword')}}" method="post">
+                  @csrf 
                   <div class="mb-3 filled form-group tooltip-end-top">
                     <i data-acorn-icon="email"></i>
-                    <input class="form-control" placeholder="Email" name="email" />
+                    <input class="form-control" placeholder="Email" value="" name="email" />
                   </div>
-                  <button type="submit" class="btn btn-lg btn-primary">Login</button>
+                  <button type="submit" id="forgot_btn" class="btn btn-lg btn-primary">Login</button>
                 </form>
               </div>
             </div>
@@ -73,5 +74,32 @@
   </div>
 @endsection
 @section("js")
+{{-- <script>
+      $(document).ready(function(){
+      $("#forgot_btn").on('click', function(e){
+        e.preventDefault();
 
+        var email = $("#email").val();
+
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url:"{{route('admin.forgotpassword')}}",
+          type: 'post',
+          data: {
+            email:email
+          },
+          success:function(data){
+            if(data.success){
+                // console.log("you are login");
+                window.location = "{{route('admin.login')}}";
+            }else{
+              console.log("something want to rong");
+            }
+            
+          }
+        });
+
+      });
+    });
+</script> --}}
 @endsection

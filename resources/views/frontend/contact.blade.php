@@ -28,23 +28,23 @@
                     <!-- Left Side Starts -->
                     <div class="col-12 col-lg-4">
                         <h3 class="text-uppercase custom-title mb-0 ft-wt-600 pb-3">Don't be shy !</h3>
-                        <p class="open-sans-font mb-3">{{$setting->description}}</p>
+                        <p class="open-sans-font mb-3">{{@$setting->description}}</p>
                         <p class="open-sans-font custom-span-contact position-relative">
                             <i class="fa fa-envelope-open position-absolute"></i>
-                            <span class="d-block">mail me</span>{{$setting->email}}
+                            <span class="d-block">mail me</span>{{@$setting->email}}
                         </p>
                         <p class="open-sans-font custom-span-contact position-relative">
                             <i class="fa fa-phone-square position-absolute"></i>
-                            <span class="d-block">call me</span>+88 {{$setting->mobile}}
+                            <span class="d-block">call me</span>+88 {{@$setting->mobile}}
                         </p>
                         <ul class="social list-unstyled pt-1 mb-5">
-                            <li class="facebook"><a target="_blanck" title="Facebook" href="{{$setting->facebook}}"><i class="fa fa-facebook"></i></a>
+                            <li class="facebook"><a target="_blanck" title="Facebook" href="{{@$setting->facebook}}"><i class="fa fa-facebook"></i></a>
                             </li>
-                            <li class="twitter"><a target="_blanck" title="Twitter" href="{{$setting->twitter}}"><i class="fa fa-twitter"></i></a>
+                            <li class="twitter"><a target="_blanck" title="Twitter" href="{{@$setting->twitter}}"><i class="fa fa-twitter"></i></a>
                             </li>
-                            <li class="youtube"><a target="_blanck" title="Youtube" href="{{$setting->youtube}}"><i class="fa fa-youtube"></i></a>
+                            <li class="youtube"><a target="_blanck" title="Youtube" href="{{@$setting->youtube}}"><i class="fa fa-youtube"></i></a>
                             </li>
-                            <li class="dribbble"><a target="_blanck" title="Github" href="{{$setting->github}}"><i class="fa fa-github"></i></a>
+                            <li class="dribbble"><a target="_blanck" title="Github" href="{{@$setting->github}}"><i class="fa fa-github"></i></a>
                             </li>
                         </ul>
                     </div>
