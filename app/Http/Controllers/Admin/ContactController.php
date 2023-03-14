@@ -67,7 +67,6 @@ class ContactController extends Controller
      public function replayStore(Request $request){
         if($request->isMethod('post')){
             // dd($request->all());
-
             $email  = $request->email;
             $name   = auth()->user()->name;
             $messageData =[
