@@ -248,6 +248,37 @@ $(function(){
 
  });
 
+ $('#replayBtn').on('click',function(e) {
+      e.preventDefault();
+
+      var formData = new FormData($("#contactReplayForm")[0]);
+      // console.log(formData);
+      $.ajax({
+        headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+        type:'POST',
+        url: "{{route('contact.replayStore')}}",
+        data: formData,
+        cache:false,
+        contentType: false,
+        processData: false,
+        success: (data) => {
+        //  console.log(data);
+        Swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'success',
+          title: 'education Create Successfully!',
+          showConfirmButton: false,
+          timer: 1500
+        })
+          $('#replayModal').modal('hide');
+          table.draw();
+        },
+        error: function(data){
+          console.log(data);
+        }
+      });
+  });
 
 });
 </script>

@@ -38,54 +38,54 @@
                     <form class="row g-3" id="siteSettingForm">
                         <div class="col-md-6">
                           <label for="email" class="form-label">Email</label>
-                          <input type="email" class="form-control" name="email" value="{{$setting->email}}" id="email" placeholder="Enter Email">
+                          <input type="email" class="form-control" name="email" value="{{@$setting->email}}" id="email" placeholder="Enter Email">
                         </div>
                         <div class="col-md-6">
                           <label for="mobile" class="form-label">Mobile</label>
-                          <input type="text" class="form-control" name="mobile" value="{{$setting->mobile}}" id="mobile" placeholder="Enter Mobile">
+                          <input type="text" class="form-control" name="mobile" value="{{@$setting->mobile}}" id="mobile" placeholder="Enter Mobile">
                         </div>
                         <div class="col-6">
                           <label for="facebook" class="form-label">Facebook</label>
-                          <input type="text" class="form-control" name="facebook" value="{{$setting->facebook}}" id="facebook" placeholder="Facebook Link">
+                          <input type="text" class="form-control" name="facebook" value="{{@$setting->facebook}}" id="facebook" placeholder="Facebook Link">
                         </div>
                         <div class="col-6">
                           <label for="twitter" class="form-label">Twitter</label>
-                          <input type="text" class="form-control" id="twitter" value="{{$setting->twitter}}" name="twitter" placeholder="Twitter Link">
+                          <input type="text" class="form-control" id="twitter" value="{{@$setting->twitter}}" name="twitter" placeholder="Twitter Link">
                         </div>
                         <div class="col-6">
                             <label for="youtube" class="form-label">Youtube</label>
-                            <input type="text" class="form-control" id="youtube" value="{{$setting->youtube}}" name="youtube" placeholder="youtube Link">
+                            <input type="text" class="form-control" id="youtube" value="{{@$setting->youtube}}" name="youtube" placeholder="youtube Link">
                         </div>
                         <div class="col-6">
                             <label for="github" class="form-label">Github</label>
-                            <input type="text" class="form-control" id="github" value="{{$setting->github}}" name="github" placeholder="github Link">
+                            <input type="text" class="form-control" id="github" value="{{@$setting->github}}" name="github" placeholder="github Link">
                         </div>
                         <div class="col-6">
                             <label for="total_project" class="form-label">Total Project</label>
-                            <input type="number" class="form-control" value="{{$setting->total_project}}" id="total_project" name="total_project" placeholder="total project">
+                            <input type="number" class="form-control" value="{{@$setting->total_project}}" id="total_project" name="total_project" placeholder="total project">
                         </div>
                         <div class="col-6">
                             <label for="experience_year" class="form-label">Experience Year</label>
-                            <input type="number" class="form-control" value="{{$setting->experience_year}}" id="experience_year" name="experience_year" placeholder="experience year">
+                            <input type="number" class="form-control" value="{{@$setting->experience_year}}" id="experience_year" name="experience_year" placeholder="experience year">
                         </div>
                         <div class="col-6">
                             <label for="awards" class="form-label">Award</label>
-                            <input type="number" class="form-control" value="{{$setting->awards}}" id="awards" name="awards" placeholder="award">
+                            <input type="number" class="form-control" value="{{@$setting->awards}}" id="awards" name="awards" placeholder="award">
                         </div>
                         <div class="col-6">
                             <label for="happy_customer" class="form-label">Happy Customer</label>
-                            <input type="number" class="form-control" value="{{$setting->happy_customer}}" id="happy_customer" name="happy_customer" placeholder="happy customer">
+                            <input type="number" class="form-control" value="{{@$setting->happy_customer}}" id="happy_customer" name="happy_customer" placeholder="happy customer">
                         </div>
                         <div class="col-12">
                             <label for="description" class="form-label">Description</label>
-                            <textarea name="description" id="description" class="form-control" cols="15" rows="3" placeholder="Wrire ...">{{$setting->description}}</textarea>
+                            <textarea name="description" id="description" class="form-control" cols="15" rows="3" placeholder="Wrire ...">{{@$setting->description}}</textarea>
                         </div>
                         <div class="col-6">
-                            <label for="faveicon" class="form-label">Faveicon &nbsp;&nbsp;<a target="_blanck" href="{{asset($setting->fave_icon)}}">View</a></label>
+                            <label for="faveicon" class="form-label">Faveicon &nbsp;&nbsp;<a target="_blanck" href="{{asset(@$setting->fave_icon)}}">View</a></label>
                             <input type="file" class="form-control" id="faveicon" name="fave_icon">
                         </div>
                         <div class="col-6">
-                            <label for="logo" class="form-label">Logo &nbsp;&nbsp;<a target="_blanck" href="{{asset($setting->logo)}}">View</a></label>
+                            <label for="logo" class="form-label">Logo &nbsp;&nbsp;<a target="_blanck" href="{{asset(@$setting->logo)}}">View</a></label>
                             <input type="file" class="form-control" id="logo" name="logo">
                         </div>
                         <div class="col-12">

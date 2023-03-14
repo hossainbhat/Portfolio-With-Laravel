@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Contact;
@@ -61,5 +62,25 @@ class ContactController extends Controller
 
         $contact->delete();
         return redirect()->back();
+     }
+
+     public function replayStore(Request $request){
+        if($request->isMethod('post')){
+            // dd($request->all());
+
+            $email  = $request->email;
+            $name   = auth()->user()->name;
+            $messageData =[
+                'email'     =>auth()->user()->email,
+                'userName'  =>$name,
+                'name'      =>$request->name,
+                'subject'   =>$request->subject,
+                'content'   =>$request->content,
+            ];
+            Mail::send('Mail.replay_email',$messageData,function($message) use ($email){
+                $message ->to($email)->subject('Replay From Md Hossain Bhat');
+            });
+
+        }
      }
 }
