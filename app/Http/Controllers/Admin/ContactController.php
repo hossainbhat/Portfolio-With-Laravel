@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Contact;
+use Illuminate\Mail\Mailables\Content;
 
 class ContactController extends Controller
 {
@@ -58,8 +59,8 @@ class ContactController extends Controller
         return response()->json($contact);
     }
 
-    public function destroy(Contact $contact){
-
+    public function destroy($id){
+        $contact = Contact::find($id);
         $contact->delete();
         return redirect()->back();
      }

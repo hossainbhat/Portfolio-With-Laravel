@@ -77,8 +77,7 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::get('contact/{id}', 'ContactController@show')->name('contact.show');
         Route::get('contact/{id}/replay', 'ContactController@replay')->name('contact.replay');
         Route::post('contact/replay', 'ContactController@replayStore')->name('contact.replayStore');
-        Route::get('contact/{contact}', 'ContactController@destroy')->name('contact.destroy');
-        Route::get('contact/{contact}', 'ContactController@destroy')->name('contact.destroy');
+        Route::get('contact/{id}/delete', 'ContactController@destroy')->name('contact.destroy');
 
         //portfolio
         Route::get('blog', 'BlogController@index')->name('blog.index');
